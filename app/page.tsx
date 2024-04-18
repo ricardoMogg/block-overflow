@@ -1,16 +1,22 @@
-'use client';
-import type { AppProps } from 'next/app';
-import { initThinBackend } from 'thin-backend';
-import { ThinBackend } from 'thin-backend-react';
-import 'thin-backend-react/auth.css';
+"use client";
+import {
+  DynamicContextProvider,
+  DynamicWidget,
+} from "@dynamic-labs/sdk-react-core";
+import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 
-initThinBackend({ host: process.env.NEXT_PUBLIC_BACKEND_URL });
-
-function Home({ Component, pageProps }: AppProps) {
+export default function Home() {
   return (
-    <ThinBackend requireLogin>
-      <Component {...pageProps} />
-    </ThinBackend>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <DynamicContextProvider
+        settings={{
+          // Find your environment id at https://app.dynamic.xyz/dashboard/developer
+          environmentId: "f70aa699-4197-4c47-bede-c2e8cf23f927",
+          walletConnectors: [EthereumWalletConnectors],
+        }}
+      >
+        <DynamicWidget />
+      </DynamicContextProvider>
+    </main>
   );
 }
-export default Home;
