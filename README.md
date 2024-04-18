@@ -10,7 +10,7 @@ yarn install
 
 ```
 
-Then, run the development servers:
+Then, run the development server:
 
 ```bash
 
