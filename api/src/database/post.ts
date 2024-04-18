@@ -1,18 +1,36 @@
 import client from './client'
 
-
-function CreatePost() {
+interface CreatePostInput {
+  title: string
+  body: string
+  authorId: string
+}
+function CreatePost(post: CreatePostInput) {
   return client.post.create({
     data: {
-      title: 'Hello World',
-      body: 'This is my first post',
+      title: post.title,
+      body: post.body,
+      authorId: post.authorId,
     },
   })
 }
 
-
-function GetPosts() {
-  return client.post.findMany()
+function GetPost(id: string) {
+  return client.post.findFirstOrThrow({
+    where: {
+      id: id,
+    },
+  })
 }
 
-export { CreatePost, GetPosts }
+function GetPosts() {
+  return client.post.findMany(
+    {
+      orderBy: {
+        createdAt: 'desc',
+      },
+    }
+  )
+}
+
+export { CreatePost, GetPosts, GetPost, CreatePostInput }
