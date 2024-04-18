@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/BountyContract.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.24;\n\n// Uncomment this line to use console.log\n// import \"hardhat/console.sol\";\n\ncontract BountyContract {\n    // Struct to represent a bounty\n    struct Bounty {\n        address creator;    // Address of the creator of the bounty\n        uint256 amount;     // Amount of the bounty\n        bool isPaid;        // Flag to track if the bounty is paid\n    }\n\n    // Mapping from bounty ID to Bounty\n    mapping(uint256 => Bounty) public bounties;\n\n    // Event to emit when a new bounty is created\n    event BountyCreated(uint256 indexed bountyId, address indexed creator, uint256 amount);\n\n    // Event to emit when a bounty is paid\n    event BountyPaid(uint256 indexed bountyId, address indexed receiver, uint256 amount);\n\n    // Function to create a new bounty\n    function createBounty(uint256 _bountyId) external payable {\n        require(msg.value > 0, \"Bounty amount must be greater than zero\");\n        require(bounties[_bountyId].creator == address(0), \"Bounty with this ID already exists\");\n\n        bounties[_bountyId] = Bounty(msg.sender, msg.value, false);\n\n        emit BountyCreated(_bountyId, msg.sender, msg.value);\n    }\n\n    // Function to execute the payout of a bounty\n    function executePayout(uint256 _bountyId, address _receiver) external {\n        require(bounties[_bountyId].creator == msg.sender, \"Only the creator can execute payout\");\n        require(!bounties[_bountyId].isPaid, \"Bounty is already paid\");\n\n        uint256 amount = bounties[_bountyId].amount;\n        bounties[_bountyId].isPaid = true;\n        payable(_receiver).transfer(amount);\n\n        emit BountyPaid(_bountyId, _receiver, amount);\n    }\n\n}"
+    }
+  },
+  "settings": {
+    "evmVersion": "paris",
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
