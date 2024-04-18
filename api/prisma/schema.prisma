@@ -26,9 +26,9 @@ model Post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   title     String
-  body      String?
+  body      String
   views     Int      @default(0)
   upVotes   Int      @default(0)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String?  @db.ObjectId
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  String  @db.ObjectId
 }
