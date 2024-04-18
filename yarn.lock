@@ -66,110 +66,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cbhq/cds-common@npm:^6.7.0":
-  version: 6.7.0
-  resolution: "@cbhq/cds-common@npm:6.7.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fcds-common%2F-%2F%40cbhq%2Fcds-common-6.7.0.tgz"
-  dependencies:
-    "@cbhq/cds-utils": "npm:^1.1.2"
-    "@cbhq/d3": "npm:^0.0.2"
-    d3-array: "npm:2.12.1"
-    d3-shape: "npm:^2.1.0"
-    lodash: "npm:^4.17.21"
-    react-is: "npm:^17.0.2"
-    type-fest: "npm:^2.19.0"
-  peerDependencies:
-    "@cbhq/cds-icons": ^2.8.0
-    "@cbhq/cds-illustrations": ^3.3.0
-    react: 18.2.0
-    react-dom: ^18.2.0
-  checksum: f5eb83b2e3c5cb7214ca6904389a28d3fdb11d53419182ae2546c1ead2c02a2075c02f9e979d77612b27392354874cae4bafc9327db01645b80fe3ab160a55d8
-  languageName: node
-  linkType: hard
-
-"@cbhq/cds-fonts@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@cbhq/cds-fonts@npm:1.0.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fcds-fonts%2F-%2F%40cbhq%2Fcds-fonts-1.0.1.tgz"
-  checksum: 4a8f1b6d6f0ee5f032e0585eb7ab0884bae49b80e69c4c4e46c8c789002eb2beec69c65938216baaeeb2de5bddf3ec7eddc9e2f459c7f2d664d426a94568c47a
-  languageName: node
-  linkType: hard
-
-"@cbhq/cds-icons@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "@cbhq/cds-icons@npm:2.8.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fcds-icons%2F-%2F%40cbhq%2Fcds-icons-2.8.0.tgz"
-  checksum: 57974054d73123963569e1563427885994aef1e6c1d93f3d77fd1118e842fcd81cba27300cdc81fd99cb9fbc55c55e4dfff61a17b75d516ed75cd72622711322
-  languageName: node
-  linkType: hard
-
-"@cbhq/cds-illustrations@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@cbhq/cds-illustrations@npm:3.3.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fcds-illustrations%2F-%2F%40cbhq%2Fcds-illustrations-3.3.0.tgz"
-  checksum: 38305b5fb3976c68b532b80b5f0540d9c93a4ba57d1177023343ec40c1de0d46ba3cfc36a5eb49748985d85914e0104e7b60dc2c108eaa24a62fa934daa8e279
-  languageName: node
-  linkType: hard
-
-"@cbhq/cds-lottie-files@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@cbhq/cds-lottie-files@npm:1.0.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fcds-lottie-files%2F-%2F%40cbhq%2Fcds-lottie-files-1.0.2.tgz"
-  checksum: 4d6e3cac44e3c1ec4c718caca9b0c004793c93bcfffd66efd82883bde21d48ed0062b42df2d02190ea4f198d459eaecc87650fc3519f8d217ac580f90e63c87b
-  languageName: node
-  linkType: hard
-
-"@cbhq/cds-utils@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@cbhq/cds-utils@npm:1.1.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fcds-utils%2F-%2F%40cbhq%2Fcds-utils-1.1.2.tgz"
-  dependencies:
-    humps: "npm:^2.0.1"
-    type-fest: "npm:^2.19.0"
-  checksum: 6dedc121ad3729f88773efd375b54df69bad165ee5a03a3a0c49d14c6743dd6d0f1bc94a7fb6de5926ea23185ce5dd98fec15814c684f88de229bfb324dec3d4
-  languageName: node
-  linkType: hard
-
-"@cbhq/cds-web@npm:^6.7.0":
-  version: 6.7.0
-  resolution: "@cbhq/cds-web@npm:6.7.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fcds-web%2F-%2F%40cbhq%2Fcds-web-6.7.0.tgz"
-  dependencies:
-    "@cbhq/cds-common": "npm:^6.7.0"
-    "@cbhq/cds-fonts": "npm:^1.0.1"
-    "@cbhq/cds-lottie-files": "npm:^1.0.2"
-    "@cbhq/cds-utils": "npm:^1.1.2"
-    "@cbhq/d3": "npm:^0.0.2"
-    "@popperjs/core": "npm:^2.9.0"
-    d3-interpolate-path: "npm:^2.2.2"
-    d3-selection: "npm:^1.4.2"
-    focus-visible: "npm:^5.2.0"
-    lodash: "npm:^4.17.21"
-    lottie-web: "npm:^5.7.6"
-    react-popper: "npm:^2.2.4"
-  peerDependencies:
-    "@cbhq/cds-icons": ^2.8.0
-    "@cbhq/cds-illustrations": ^3.3.0
-    framer-motion: ^10.18.0
-    react: 18.2.0
-    react-dom: ^18.2.0
-  checksum: 234d143c942f454b1036d0a0a2625426c5d7be5cc3bd86d328db40bd7caf926dab28ded5b754e0f0ac4b727e6953e37beee6b822843bc76ceaeecd165887ff7f
-  languageName: node
-  linkType: hard
-
-"@cbhq/d3@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "@cbhq/d3@npm:0.0.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40cbhq%2Fd3%2F-%2Fd3-0.0.2.tgz"
-  dependencies:
-    "@types/d3-color": "npm:2.0.1"
-    "@types/d3-interpolate": "npm:1.4.2"
-    "@types/d3-scale": "npm:3.3.0"
-    "@types/d3-transition": "npm:1.3.2"
-    d3-array: "npm:2.12.1"
-    d3-dispatch: "npm:1.0.6"
-    d3-ease: "npm:1.0.7"
-    d3-format: "npm:2.0.0"
-    d3-selection: "npm:1.4.2"
-    d3-time: "npm:2.1.1"
-    d3-time-format: "npm:3.0.0"
-    d3-timer: "npm:1.0.10"
-  checksum: 7903b0d5a1eaaa4ae43764f60b4b5004d0a31fd1357844ba19e2e87259f00c1ee88653086086053f269641566397c3ed2d0f4bbad356f2ae98a87cf5ef4e7495
-  languageName: node
-  linkType: hard
-
 "@csstools/css-parser-algorithms@npm:^2.6.1":
   version: 2.6.1
   resolution: "@csstools/css-parser-algorithms@npm:2.6.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40csstools%2Fcss-parser-algorithms%2F-%2Fcss-parser-algorithms-2.6.1.tgz"
@@ -477,13 +373,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:^2.9.0":
-  version: 2.11.8
-  resolution: "@popperjs/core@npm:2.11.8::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40popperjs%2Fcore%2F-%2Fcore-2.11.8.tgz"
-  checksum: 4681e682abc006d25eb380d0cf3efc7557043f53b6aea7a5057d0d1e7df849a00e281cd8ea79c902a35a414d7919621fc2ba293ecec05f413598e0b23d5a1e63
-  languageName: node
-  linkType: hard
-
 "@rushstack/eslint-patch@npm:^1.3.3":
   version: 1.10.2
   resolution: "@rushstack/eslint-patch@npm:1.10.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40rushstack%2Feslint-patch%2F-%2Feslint-patch-1.10.2.tgz"
@@ -505,61 +394,6 @@ __metadata:
     "@swc/counter": "npm:^0.1.3"
     tslib: "npm:^2.4.0"
   checksum: 21a9b9cfe7e00865f9c9f3eb4c1cc5b397143464f7abee76a2c5366e591e06b0155b5aac93fe8269ef8d548df253f6fd931e9ddfc0fd12efd405f90f45506e7d
-  languageName: node
-  linkType: hard
-
-"@types/d3-color@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@types/d3-color@npm:2.0.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40types%2Fd3-color%2F-%2Fd3-color-2.0.1.tgz"
-  checksum: f4b282e9549fbf645d555265b883bd5266a9a6edbc082cf4883a4f024388e69d9647400a61fa1cad90b59957eefda8c30330f345e462fdaf909e12f7694c9130
-  languageName: node
-  linkType: hard
-
-"@types/d3-color@npm:^1":
-  version: 1.4.5
-  resolution: "@types/d3-color@npm:1.4.5::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40types%2Fd3-color%2F-%2Fd3-color-1.4.5.tgz"
-  checksum: d84233fdfb3ea81710a2aa7eb8f332a0199dfbefb10cd81a68e504dfb2a00b78d309ebe0b1b452c97d7b9de193a301b8ce3cec0842ec300277caef34ef2dd8ed
-  languageName: node
-  linkType: hard
-
-"@types/d3-interpolate@npm:1.4.2":
-  version: 1.4.2
-  resolution: "@types/d3-interpolate@npm:1.4.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40types%2Fd3-interpolate%2F-%2Fd3-interpolate-1.4.2.tgz"
-  dependencies:
-    "@types/d3-color": "npm:^1"
-  checksum: 98bff93ce4d94485a4f6117e554854ec69072382910008e785d2c960b50e643093a8cfa2e0875b3d1dff19f3603b6e16a4eea8122c7c8ead3623daf3044cd22e
-  languageName: node
-  linkType: hard
-
-"@types/d3-scale@npm:3.3.0":
-  version: 3.3.0
-  resolution: "@types/d3-scale@npm:3.3.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40types%2Fd3-scale%2F-%2Fd3-scale-3.3.0.tgz"
-  dependencies:
-    "@types/d3-time": "npm:*"
-  checksum: 64b77a85172eaa6f1dd829788ffd44e639836d00866ebbc23accf1983ccf332eb2d9992eb285fda1615862c3e64ce8041ce4d62c37ae68fd4e2f498065221c5a
-  languageName: node
-  linkType: hard
-
-"@types/d3-selection@npm:^1":
-  version: 1.4.6
-  resolution: "@types/d3-selection@npm:1.4.6::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40types%2Fd3-selection%2F-%2Fd3-selection-1.4.6.tgz"
-  checksum: bfe632519bd96d23aa010e88a49008e8c996e07854e0ce7ad652b0713868cc2df6dc13dd60fd06e39d82203da76a486c617bb1d80ce26e3e3cd3c9c526753355
-  languageName: node
-  linkType: hard
-
-"@types/d3-time@npm:*":
-  version: 3.0.3
-  resolution: "@types/d3-time@npm:3.0.3::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40types%2Fd3-time%2F-%2Fd3-time-3.0.3.tgz"
-  checksum: 245a8aadca504df27edf730de502e47a68f16ae795c86b5ca35e7afa91c133aa9ef4d08778f8cf1ed2be732f89a4105ba4b437ce2afbdfd17d3d937b6ba5f568
-  languageName: node
-  linkType: hard
-
-"@types/d3-transition@npm:1.3.2":
-  version: 1.3.2
-  resolution: "@types/d3-transition@npm:1.3.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2F%40types%2Fd3-transition%2F-%2Fd3-transition-1.3.2.tgz"
-  dependencies:
-    "@types/d3-selection": "npm:^1"
-  checksum: 9e1340c2840fde63f224550cbde5531b8b2493218d421f97de138c1e7ca9b1f481dfc9e4c91cb5ce84df9df671e2d95468556be1f8cf1e28f0c33929322115a4
   languageName: node
   linkType: hard
 
@@ -1115,9 +949,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "block-overflow@workspace:."
   dependencies:
-    "@cbhq/cds-icons": "npm:^2.8.0"
-    "@cbhq/cds-illustrations": "npm:^3.3.0"
-    "@cbhq/cds-web": "npm:^6.7.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
@@ -1437,91 +1268,6 @@ __metadata:
   version: 3.1.3
   resolution: "csstype@npm:3.1.3::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"
   checksum: 80c089d6f7e0c5b2bd83cf0539ab41474198579584fa10d86d0cafe0642202343cbc119e076a0b1aece191989477081415d66c9fefbf3c957fc2fc4b7009f248
-  languageName: node
-  linkType: hard
-
-"d3-array@npm:2, d3-array@npm:2.12.1":
-  version: 2.12.1
-  resolution: "d3-array@npm:2.12.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-array%2F-%2Fd3-array-2.12.1.tgz"
-  dependencies:
-    internmap: "npm:^1.0.0"
-  checksum: 7eca10427a9f113a4ca6a0f7301127cab26043fd5e362631ef5a0edd1c4b2dd70c56ed317566700c31e4a6d88b55f3951aaba192291817f243b730cb2352882e
-  languageName: node
-  linkType: hard
-
-"d3-dispatch@npm:1.0.6":
-  version: 1.0.6
-  resolution: "d3-dispatch@npm:1.0.6::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-dispatch%2F-%2Fd3-dispatch-1.0.6.tgz"
-  checksum: 6302554a019e2d75d4e3dc7e8757a00b4b12ac2a2952bccc66e4478ccd170f425e2b6a9443118d5feadcd2439f33582b63c7925e832104ff1978cadea2a30dc2
-  languageName: node
-  linkType: hard
-
-"d3-ease@npm:1.0.7":
-  version: 1.0.7
-  resolution: "d3-ease@npm:1.0.7::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-ease%2F-%2Fd3-ease-1.0.7.tgz"
-  checksum: 784de7696cc683f251b2186ae4e248761758bdbfab1f78f1a7bddb08a4832923033be765dba907485f8911270f9343c3068e543d33d77cca1182582b34cb4970
-  languageName: node
-  linkType: hard
-
-"d3-format@npm:2.0.0":
-  version: 2.0.0
-  resolution: "d3-format@npm:2.0.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-format%2F-%2Fd3-format-2.0.0.tgz"
-  checksum: c869af459e20767dc3d9cbb2946ba79cc266ae4fb35d11c50c63fc89ea4ed168c702c7e3db94d503b3618de9609bf3bf2d855ef53e21109ddd7eb9c8f3fcf8a1
-  languageName: node
-  linkType: hard
-
-"d3-interpolate-path@npm:^2.2.2":
-  version: 2.3.0
-  resolution: "d3-interpolate-path@npm:2.3.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-interpolate-path%2F-%2Fd3-interpolate-path-2.3.0.tgz"
-  checksum: 5249d35ab903e6955d8a240029b60c84d347d20ab6e730ef99d4ae516996bebf641257b2718779f141a88bd0306840344e5d863d893f662aeeab5cc4d9a87360
-  languageName: node
-  linkType: hard
-
-"d3-path@npm:1 - 2":
-  version: 2.0.0
-  resolution: "d3-path@npm:2.0.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-path%2F-%2Fd3-path-2.0.0.tgz"
-  checksum: ef206f83c1123d4ad364c23b6fe877a7cd8afa76c30e13bd0588cd9b7c4ed4b577ebfd9499cdcac63268d7ae29c0a53ec38d6623a7c98585f3c118323e8f473f
-  languageName: node
-  linkType: hard
-
-"d3-selection@npm:1.4.2, d3-selection@npm:^1.4.2":
-  version: 1.4.2
-  resolution: "d3-selection@npm:1.4.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-selection%2F-%2Fd3-selection-1.4.2.tgz"
-  checksum: e755b6b62d794d0b968cc6264f37109e425de0d9fd306ce94414b07e46a2c6830d21c1fe0821a660d07e82069b6fe3b67da1b3b909e8f6af8f16f020cd25cae0
-  languageName: node
-  linkType: hard
-
-"d3-shape@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "d3-shape@npm:2.1.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-shape%2F-%2Fd3-shape-2.1.0.tgz"
-  dependencies:
-    d3-path: "npm:1 - 2"
-  checksum: d86c84322b0ccd550df93ec4986359548cb2c25c9fae326984a59d1caeeb40c78f62678bb93951eed65536bc2d8efa446b13386acb79875234dc79dbcf16dbd7
-  languageName: node
-  linkType: hard
-
-"d3-time-format@npm:3.0.0":
-  version: 3.0.0
-  resolution: "d3-time-format@npm:3.0.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-time-format%2F-%2Fd3-time-format-3.0.0.tgz"
-  dependencies:
-    d3-time: "npm:1 - 2"
-  checksum: 0abe3379f07d1c12ce8930cdddad1223c99cd3e4eac05cf409b5a7953e9ebed56a95a64b0977f63958cfb6101fa4a2a85533a5eae40df84f22c0117dbf5e8982
-  languageName: node
-  linkType: hard
-
-"d3-time@npm:1 - 2, d3-time@npm:2.1.1":
-  version: 2.1.1
-  resolution: "d3-time@npm:2.1.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-time%2F-%2Fd3-time-2.1.1.tgz"
-  dependencies:
-    d3-array: "npm:2"
-  checksum: 4a01770a857bc37d2bafb8f00250e0e6a1fcc8051aea93e5eed168d8ee93e92da508a75ab5e42fc5472aa37e2a83aac68afaf3f12d9167c184ce781faadf5682
-  languageName: node
-  linkType: hard
-
-"d3-timer@npm:1.0.10":
-  version: 1.0.10
-  resolution: "d3-timer@npm:1.0.10::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fd3-timer%2F-%2Fd3-timer-1.0.10.tgz"
-  checksum: 7e77030a206861e4e626754c689795d43f036fb07a7f8ca6360eb8b7cbe6f52bf43c9c4297ae9a9a906e4de594212702f83c0cde23d4e20d8689a4211e438155
   languageName: node
   linkType: hard
 
@@ -2478,13 +2224,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focus-visible@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "focus-visible@npm:5.2.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Ffocus-visible%2F-%2Ffocus-visible-5.2.0.tgz"
-  checksum: bc746775e4c17d05faf7219a91fd5ae6fec320b87f20cde5402eff17fab148b6253f25748f0235b3110528a1335ee0c6d4dc3692cc6b6174d0ebd253dd28a50d
-  languageName: node
-  linkType: hard
-
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Ffor-each%2F-%2Ffor-each-0.3.3.tgz"
@@ -2868,13 +2607,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"humps@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "humps@npm:2.0.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fhumps%2F-%2Fhumps-2.0.1.tgz"
-  checksum: 554f3bb9de780ce833f0058f30536f87615bd75ead2008b98d900598379fe5dcd3300bdd9092d3e078d47b66fade82276974dda7151318b5de7a1d837c3abe6e
-  languageName: node
-  linkType: hard
-
 "iconv-lite@npm:^0.6.2":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Ficonv-lite%2F-%2Ficonv-lite-0.6.3.tgz"
@@ -2947,13 +2679,6 @@ __metadata:
     hasown: "npm:^2.0.0"
     side-channel: "npm:^1.0.4"
   checksum: f8b294a4e6ea3855fc59551bbf35f2b832cf01fd5e6e2a97f5c201a071cc09b49048f856e484b67a6c721da5e55736c5b6ddafaf19e2dbeb4a3ff1821680de6c
-  languageName: node
-  linkType: hard
-
-"internmap@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "internmap@npm:1.0.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Finternmap%2F-%2Finternmap-1.0.1.tgz"
-  checksum: 60942be815ca19da643b6d4f23bd0bf4e8c97abbd080fb963fe67583b60bdfb3530448ad4486bae40810e92317bded9995cc31411218acc750d72cd4e8646eee
   languageName: node
   linkType: hard
 
@@ -3465,14 +3190,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.21":
-  version: 4.17.21
-  resolution: "lodash@npm:4.17.21::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Flodash%2F-%2Flodash-4.17.21.tgz"
-  checksum: d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
-  languageName: node
-  linkType: hard
-
-"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Floose-envify%2F-%2Floose-envify-1.4.0.tgz"
   dependencies:
@@ -3480,13 +3198,6 @@ __metadata:
   bin:
     loose-envify: cli.js
   checksum: 655d110220983c1a4b9c0c679a2e8016d4b67f6e9c7b5435ff5979ecdb20d0813f4dec0a08674fcbdd4846a3f07edbb50a36811fd37930b94aaa0d9daceb017e
-  languageName: node
-  linkType: hard
-
-"lottie-web@npm:^5.7.6":
-  version: 5.12.2
-  resolution: "lottie-web@npm:5.12.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Flottie-web%2F-%2Flottie-web-5.12.2.tgz"
-  checksum: 0aeaf631b10a76afd025df70c2a1486543530708e07a316946c08e55891dac483ffbaf2bf3648ae0b9c54c733118a0a086fd150aa76f7848606214c67ad72c30
   languageName: node
   linkType: hard
 
@@ -4282,38 +3993,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fast-compare@npm:^3.0.1":
-  version: 3.2.2
-  resolution: "react-fast-compare@npm:3.2.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Freact-fast-compare%2F-%2Freact-fast-compare-3.2.2.tgz"
-  checksum: 0bbd2f3eb41ab2ff7380daaa55105db698d965c396df73e6874831dbafec8c4b5b08ba36ff09df01526caa3c61595247e3269558c284e37646241cba2b90a367
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Freact-is%2F-%2Freact-is-16.13.1.tgz"
   checksum: 33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
-  languageName: node
-  linkType: hard
-
-"react-is@npm:^17.0.2":
-  version: 17.0.2
-  resolution: "react-is@npm:17.0.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Freact-is%2F-%2Freact-is-17.0.2.tgz"
-  checksum: 2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
-  languageName: node
-  linkType: hard
-
-"react-popper@npm:^2.2.4":
-  version: 2.3.0
-  resolution: "react-popper@npm:2.3.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Freact-popper%2F-%2Freact-popper-2.3.0.tgz"
-  dependencies:
-    react-fast-compare: "npm:^3.0.1"
-    warning: "npm:^4.0.2"
-  peerDependencies:
-    "@popperjs/core": ^2.0.0
-    react: ^16.8.0 || ^17 || ^18
-    react-dom: ^16.8.0 || ^17 || ^18
-  checksum: 23f93540537ca4c035425bb8d5e51b11131fbc921d7ac1d041d0ae557feac8c877f3a012d36b94df8787803f52ed81e6df9257ac9e58719875f7805518d6db3f
   languageName: node
   linkType: hard
 
@@ -5134,13 +4817,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^2.19.0":
-  version: 2.19.0
-  resolution: "type-fest@npm:2.19.0::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Ftype-fest%2F-%2Ftype-fest-2.19.0.tgz"
-  checksum: a5a7ecf2e654251613218c215c7493574594951c08e52ab9881c9df6a6da0aeca7528c213c622bc374b4e0cb5c443aa3ab758da4e3c959783ce884c3194e12cb
-  languageName: node
-  linkType: hard
-
 "typed-array-buffer@npm:^1.0.2":
   version: 1.0.2
   resolution: "typed-array-buffer@npm:1.0.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Ftyped-array-buffer%2F-%2Ftyped-array-buffer-1.0.2.tgz"
@@ -5277,15 +4953,6 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Futil-deprecate%2F-%2Futil-deprecate-1.0.2.tgz"
   checksum: 41a5bdd214df2f6c3ecf8622745e4a366c4adced864bc3c833739791aeeeb1838119af7daed4ba36428114b5c67dcda034a79c882e97e43c03e66a4dd7389942
-  languageName: node
-  linkType: hard
-
-"warning@npm:^4.0.2":
-  version: 4.0.3
-  resolution: "warning@npm:4.0.3::__archiveUrl=https%3A%2F%2Fartifactory.cbhq.net%3A8081%2Fartifactory%2Fapi%2Fnpm%2Fcb-npm-master%2Fwarning%2F-%2Fwarning-4.0.3.tgz"
-  dependencies:
-    loose-envify: "npm:^1.0.0"
-  checksum: aebab445129f3e104c271f1637fa38e55eb25f968593e3825bd2f7a12bd58dc3738bb70dc8ec85826621d80b4acfed5a29ebc9da17397c6125864d72301b937e
   languageName: node
   linkType: hard
 

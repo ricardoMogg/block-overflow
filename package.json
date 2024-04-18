@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@cbhq/cds-icons": "^2.8.0",
-    "@cbhq/cds-illustrations": "^3.3.0",
-    "@cbhq/cds-web": "^6.7.0",
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18"
