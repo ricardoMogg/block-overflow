@@ -44,6 +44,5 @@
     "stylelint-order": "^6.0.4",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@4.0.2"
+  }
 }
