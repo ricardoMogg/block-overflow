@@ -21,6 +21,7 @@ model Post {
   walletAddress  String
   comments  Comment[]
   upvotes PostUpvote[]
+  tags String[]
 }
 
 model Comment {

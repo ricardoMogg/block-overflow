@@ -4,6 +4,7 @@ type CreatePostInput = {
   title: string
   content: string
   walletAddress: string
+  tags: string[]
 }
 function CreatePost(post: CreatePostInput) {
   return client.post.create({
@@ -11,6 +12,7 @@ function CreatePost(post: CreatePostInput) {
       title: post.title,
       content: post.content,
       walletAddress: post.walletAddress,
+      tags: post.tags,
     },
   })
 }
@@ -98,6 +100,7 @@ type UpdatePostInput = {
   title: string
   content: string
   walletAddress: string
+  tags: string[]
 }
 function UpdatePost(updatePost: UpdatePostInput) {
   return client.post.update({
@@ -108,6 +111,7 @@ function UpdatePost(updatePost: UpdatePostInput) {
     data: {
       title: updatePost.title,
       content: updatePost.content,
+      tags: updatePost.tags,
     },
     include: {
       _count: {
