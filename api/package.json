@@ -11,7 +11,6 @@
     "start": "nodemon src/index.ts",
     "dev": "nodemon src/index.ts",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
-    "postinstall": "prisma generate",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "keywords": [],
