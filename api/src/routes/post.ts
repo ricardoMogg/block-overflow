@@ -229,8 +229,3 @@ postRouter.delete('/:id/comment/downvote/:commentId', async (req, res) => {
     return res.status(500).json({ error: 'Internal Server Error' })
   }
 })
-
-// sanity check
-postRouter.post('/health', (req, res) => {
-  res.send('post malone!!')
-})

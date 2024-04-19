@@ -19,6 +19,9 @@ app.use(cors())
 
 // routes
 app.use('/post', postRouter)
+app.get('/health', (req, res) => {
+  res.send('blockoverflow!')
+})
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)
