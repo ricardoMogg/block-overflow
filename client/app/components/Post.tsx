@@ -6,8 +6,9 @@ import {
   Image,
   Badge,
   Divider,
+  Button,
 } from "@chakra-ui/react";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 export type Post = PostDetail & PostMetrics;
 
@@ -28,22 +29,45 @@ export type PostMetrics = {
   };
 };
 
+const MOCK_BUTTONS = ["Ethereum", "OP", "Base"];
+
 const PostDetail = memo(function PostDetail({
   title,
   body,
   userId,
 }: PostDetail) {
+  const renderedButtons = useMemo(() => {
+    return MOCK_BUTTONS.map((item) => (
+      <Button
+        key={item}
+        backgroundColor="#EEF0F3"
+        color="#0A0B0D"
+        fontWeight={500}
+        borderRadius={40}
+        px={12}
+        py={8}
+      >
+        {item}
+      </Button>
+    ));
+  }, []);
+
   return (
     <HStack alignItems="flex-start" gap="16px">
       <Box w="32px" borderRadius="16px" overflow="hidden" flexShrink="0">
         <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
       </Box>
-      <VStack align="flex-start" gap="2px">
-        <Text fontSize="large">{title}</Text>
-        <Text fontSize="small">{`By: ${userId}`}</Text>
-        <Text fontSize="medium" color="GrayText">
-          {body}
-        </Text>
+      <VStack gap={16}>
+        <VStack align="flex-start" gap="2px">
+          <Text fontSize="large">{title}</Text>
+          <Text fontSize="small">{`By: ${userId}`}</Text>
+          <Text fontSize="medium" color="GrayText">
+            {body}
+          </Text>
+        </VStack>
+        <HStack gap={8} alignSelf="flex-start">
+          {renderedButtons}
+        </HStack>
       </VStack>
     </HStack>
   );
@@ -82,12 +106,18 @@ const PostComponent = memo(function PostComponent(post: Post) {
   const metrics = { voteCount, answerCount, viewCount, reward };
 
   return (
-    <VStack >
+    <VStack>
       <HStack alignItems="flex-start" p={8} pb={24}>
         <PostDetail {...details} />
+
         <PostMetricsBase {...metrics} />
       </HStack>
-      <Divider height={1} backgroundColor='#5B616E33' orientation='horizontal'/>
+
+      <Divider
+        height={1}
+        backgroundColor="#5B616E33"
+        orientation="horizontal"
+      />
     </VStack>
   );
 });
