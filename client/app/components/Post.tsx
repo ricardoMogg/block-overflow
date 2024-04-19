@@ -1,4 +1,12 @@
-import { HStack, VStack, Text, Box, Image, Badge } from "@chakra-ui/react";
+import {
+  HStack,
+  VStack,
+  Text,
+  Box,
+  Image,
+  Badge,
+  Divider,
+} from "@chakra-ui/react";
 import { memo } from "react";
 
 export type Post = PostDetail & PostMetrics;
@@ -43,7 +51,7 @@ const PostDetail = memo(function PostDetail({
 
 function PostMetricsBase(props: PostMetrics) {
   return (
-    <VStack alignItems="flex-start">
+    <VStack alignItems="flex-start" gap={16}>
       <VStack alignItems="flex-start" color="#5B616E" gap={1}>
         <Text as="span" whiteSpace="nowrap">
           0 votes
@@ -74,10 +82,13 @@ const PostComponent = memo(function PostComponent(post: Post) {
   const metrics = { voteCount, answerCount, viewCount, reward };
 
   return (
-    <HStack alignItems="flex-start">
-      <PostDetail {...details} />
-      <PostMetricsBase {...metrics} />
-    </HStack>
+    <VStack >
+      <HStack alignItems="flex-start" p={8} pb={24}>
+        <PostDetail {...details} />
+        <PostMetricsBase {...metrics} />
+      </HStack>
+      <Divider height={1} backgroundColor='#5B616E33' orientation='horizontal'/>
+    </VStack>
   );
 });
 
