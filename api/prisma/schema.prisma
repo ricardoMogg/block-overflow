@@ -13,22 +13,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  userName  String
-  email     String   @unique
-  walletAddress String @unique
-  posts     Post[]
-}
-
 model Post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   title     String
-  body      String
-  views     Int      @default(0)
-  upVotes   Int      @default(0)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  String  @db.ObjectId
+  content      String
+  walletAddress  String
+  comments  Comment[]
+  upvotes PostUpvote[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  content      String
+  walletAddress  String
+  post      Post    @relation(fields: [postId], references: [id])
+  postId    String  @db.ObjectId
+  upvotes   CommentUpvote[]
+}
+
+model PostUpvote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  post      Post    @relation(fields: [postId], references: [id])
+  postId    String  @db.ObjectId
+  walletAddress  String
+  // unique index against postId and walletAddress
+  @@unique([postId, walletAddress])
+}
+
+model CommentUpvote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  comment      Comment    @relation(fields: [commentId], references: [id])
+  commentId    String  @db.ObjectId
+  walletAddress  String
+  // unique index against commentId and walletAddress
+  @@unique([commentId, walletAddress])
 }
