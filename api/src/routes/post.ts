@@ -29,11 +29,12 @@ export const postRouter = Router()
 // create post
 postRouter.post('/', async (req, res) => {
   try {
-    const { title, content, walletAddress } = req.body
+    const { title, content, walletAddress, tags } = req.body
     const post = <CreatePostInput>{
       title,
       content,
       walletAddress,
+      tags,
     }
     const posts = await CreatePost(post)
     return res.json(posts)
@@ -158,12 +159,13 @@ postRouter.delete('/:id/comment/:commentId', async (req, res) => {
 postRouter.patch('/:id', async (req, res) => {
   try {
     const postId = req.params.id
-    const { walletAddress, content, title } = req.body
+    const { walletAddress, content, title, tags } = req.body
     const input = <UpdatePostInput>{
       postId,
       walletAddress,
       content,
       title,
+      tags,
     }
     const posts = await UpdatePost(input)
     return res.json(posts)
