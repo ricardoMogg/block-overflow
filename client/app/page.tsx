@@ -1,3 +1,4 @@
+import CreatePostButton from "./components/CreatePostButton";
 import Posts from "./components/Posts";
 import SignInButton from "./components/Header/SignInButton";
 import HeaderContainer from "./components/Header/HeaderContainer";
