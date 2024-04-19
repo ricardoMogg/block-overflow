@@ -1,6 +1,6 @@
 import client from './client'
 
-interface CreatePostInput {
+type CreatePostInput = {
   title: string
   content: string
   walletAddress: string
@@ -34,21 +34,19 @@ function GetPost(id: string) {
 }
 
 function GetPosts() {
-  return client.post.findMany(
-    {
-      orderBy: {
-        createdAt: 'desc',
-      },
-      include: {
-        _count: {
-          select: {
-            comments: true,
-            upvotes: true,
-          },
+  return client.post.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      _count: {
+        select: {
+          comments: true,
+          upvotes: true,
         },
       },
     },
-  )
+  })
 }
 
 function GetComment(id: string) {
@@ -62,11 +60,11 @@ function GetComment(id: string) {
           upvotes: true,
         },
       },
-      }
+    },
   })
 }
 
-interface CreateCommentInput {
+type CreateCommentInput = {
   content: string
   walletAddress: string
   postId: string
@@ -90,12 +88,12 @@ function CreateComment(comment: CreateCommentInput) {
           comments: true,
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-interface UpdatePostInput {
+type UpdatePostInput = {
   postId: string
   title: string
   content: string
@@ -117,12 +115,12 @@ function UpdatePost(updatePost: UpdatePostInput) {
           comments: true,
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-interface UpdateCommentInput {
+type UpdateCommentInput = {
   postId: string
   commentId: string
   content: string
@@ -141,12 +139,12 @@ function UpdateComment(updateComment: UpdateCommentInput) {
         select: {
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-interface DeletePostInput {
+type DeletePostInput = {
   postId: string
   walletAddress: string
 }
@@ -155,11 +153,11 @@ function DeletePost(deletePost: DeletePostInput) {
     where: {
       id: deletePost.postId,
       walletAddress: deletePost.walletAddress,
-    }
+    },
   })
 }
 
-interface DeleteCommentInput {
+type DeleteCommentInput = {
   postId: string
   commentId: string
   walletAddress: string
@@ -182,12 +180,12 @@ function DeleteComment(deleteComment: DeleteCommentInput) {
           comments: true,
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-interface UpvotePostInput {
+type UpvotePostInput = {
   postId: string
   walletAddress: string
 }
@@ -201,7 +199,7 @@ function UpvotePost(upvote: UpvotePostInput) {
         create: {
           walletAddress: upvote.walletAddress,
         },
-      }
+      },
     },
     include: {
       _count: {
@@ -209,12 +207,12 @@ function UpvotePost(upvote: UpvotePostInput) {
           comments: true,
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-interface UpvoteCommentInput {
+type UpvoteCommentInput = {
   postId: string
   commentId: string
   walletAddress: string
@@ -228,7 +226,7 @@ function UpvoteComment(upvote: UpvoteCommentInput) {
       upvotes: {
         create: {
           walletAddress: upvote.walletAddress,
-        }
+        },
       },
     },
     include: {
@@ -236,12 +234,12 @@ function UpvoteComment(upvote: UpvoteCommentInput) {
         select: {
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-interface DownvotePostInput {
+type DownvotePostInput = {
   postId: string
   walletAddress: string
 }
@@ -258,7 +256,7 @@ function DownvotePost(downvote: DownvotePostInput) {
             walletAddress: downvote.walletAddress,
           },
         },
-      }
+      },
     },
     include: {
       _count: {
@@ -266,12 +264,12 @@ function DownvotePost(downvote: DownvotePostInput) {
           comments: true,
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-interface DownvoteCommentInput {
+type DownvoteCommentInput = {
   postId: string
   commentId: string
   walletAddress: string
@@ -288,7 +286,7 @@ function DownvoteComment(downvote: DownvoteCommentInput) {
             commentId: downvote.commentId,
             walletAddress: downvote.walletAddress,
           },
-        }
+        },
       },
     },
     include: {
@@ -296,9 +294,33 @@ function DownvoteComment(downvote: DownvoteCommentInput) {
         select: {
           upvotes: true,
         },
-      }
-    }
+      },
+    },
   })
 }
 
-export { CreatePost, GetPosts, GetPost, CreatePostInput, CreateComment, CreateCommentInput, UpvotePost, UpvoteComment, UpvoteCommentInput, UpvotePostInput, GetComment, DownvoteCommentInput, DownvoteComment, DownvotePostInput, DownvotePost, DeleteComment, DeleteCommentInput, DeletePost, DeletePostInput, UpdateComment, UpdateCommentInput, UpdatePost, UpdatePostInput }
+export {
+  CreatePost,
+  GetPosts,
+  GetPost,
+  CreatePostInput,
+  CreateComment,
+  CreateCommentInput,
+  UpvotePost,
+  UpvoteComment,
+  UpvoteCommentInput,
+  UpvotePostInput,
+  GetComment,
+  DownvoteCommentInput,
+  DownvoteComment,
+  DownvotePostInput,
+  DownvotePost,
+  DeleteComment,
+  DeleteCommentInput,
+  DeletePost,
+  DeletePostInput,
+  UpdateComment,
+  UpdateCommentInput,
+  UpdatePost,
+  UpdatePostInput,
+}
