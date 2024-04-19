@@ -1,11 +1,13 @@
 import Posts from "./components/Posts";
-import SignInButton from "./components/SignInButton";
+import SignInButton from "./components/Header/SignInButton";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import ContentContainer from "./components/Content/ContentContainer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <SignInButton />
-      <Posts />
+    <main className="flex min-h-screen flex-col justify-between">
+      <HeaderContainer />
+      <ContentContainer />
     </main>
   );
 }
