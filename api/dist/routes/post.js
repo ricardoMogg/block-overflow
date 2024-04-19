@@ -217,7 +217,3 @@ exports.postRouter.delete('/:id/comment/downvote/:commentId', (req, res) => __aw
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }));
-// sanity check
-exports.postRouter.post('/health', (req, res) => {
-    res.send('post malone!!');
-});
