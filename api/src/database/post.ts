@@ -95,6 +95,98 @@ function CreateComment(comment: CreateCommentInput) {
   })
 }
 
+interface UpdatePostInput {
+  postId: string
+  title: string
+  content: string
+  walletAddress: string
+}
+function UpdatePost(updatePost: UpdatePostInput) {
+  return client.post.update({
+    where: {
+      id: updatePost.postId,
+      walletAddress: updatePost.walletAddress,
+    },
+    data: {
+      title: updatePost.title,
+      content: updatePost.content,
+    },
+    include: {
+      _count: {
+        select: {
+          comments: true,
+          upvotes: true,
+        },
+      }
+    }
+  })
+}
+
+interface UpdateCommentInput {
+  postId: string
+  commentId: string
+  content: string
+  walletAddress: string
+}
+function UpdateComment(updateComment: UpdateCommentInput) {
+  return client.comment.update({
+    where: {
+      id: updateComment.commentId,
+    },
+    data: {
+      content: updateComment.content,
+    },
+    include: {
+      _count: {
+        select: {
+          upvotes: true,
+        },
+      }
+    }
+  })
+}
+
+interface DeletePostInput {
+  postId: string
+  walletAddress: string
+}
+function DeletePost(deletePost: DeletePostInput) {
+  return client.post.delete({
+    where: {
+      id: deletePost.postId,
+      walletAddress: deletePost.walletAddress,
+    }
+  })
+}
+
+interface DeleteCommentInput {
+  postId: string
+  commentId: string
+  walletAddress: string
+}
+function DeleteComment(deleteComment: DeleteCommentInput) {
+  return client.post.update({
+    where: {
+      id: deleteComment.postId,
+    },
+    data: {
+      comments: {
+        delete: {
+          id: deleteComment.commentId,
+        },
+      },
+    },
+    include: {
+      _count: {
+        select: {
+          comments: true,
+          upvotes: true,
+        },
+      }
+    }
+  })
+}
+
 interface UpvotePostInput {
   postId: string
   walletAddress: string
@@ -209,4 +301,4 @@ function DownvoteComment(downvote: DownvoteCommentInput) {
   })
 }
 
-export { CreatePost, GetPosts, GetPost, CreatePostInput, CreateComment, CreateCommentInput, UpvotePost, UpvoteComment, UpvoteCommentInput, UpvotePostInput, GetComment, DownvoteCommentInput, DownvoteComment, DownvotePostInput, DownvotePost }
+export { CreatePost, GetPosts, GetPost, CreatePostInput, CreateComment, CreateCommentInput, UpvotePost, UpvoteComment, UpvoteCommentInput, UpvotePostInput, GetComment, DownvoteCommentInput, DownvoteComment, DownvotePostInput, DownvotePost, DeleteComment, DeleteCommentInput, DeletePost, DeletePostInput, UpdateComment, UpdateCommentInput, UpdatePost, UpdatePostInput }

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { CreatePost, GetPosts, GetPost, CreatePostInput, CreateComment, CreateCommentInput, UpvotePost, UpvoteComment, UpvoteCommentInput, UpvotePostInput, DownvoteComment, DownvoteCommentInput, DownvotePost, DownvotePostInput } from '../database/post';
+import { CreatePost, GetPosts, GetPost, CreatePostInput, CreateComment, CreateCommentInput, UpvotePost, UpvoteComment, UpvoteCommentInput, UpvotePostInput, DownvoteComment, DownvoteCommentInput, DownvotePost, DownvotePostInput, DeletePostInput, DeletePost, DeleteComment, DeleteCommentInput, UpdateComment, UpdateCommentInput, UpdatePost, UpdatePostInput } from '../database/post';
 
 export const postRouter = Router();
 
@@ -96,6 +96,79 @@ postRouter.post('/:id/comment/upvote/:commentId', async (req, res) => {
   }
 });
 
+// delete a post
+postRouter.delete('/:id', async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const input = <DeletePostInput>{
+      postId,
+      walletAddress: req.body.walletAddress,
+    }
+    const posts = await DeletePost(input);
+    return res.json(posts);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// delete a comment
+postRouter.delete('/:id/comment/:commentId', async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const commentId = req.params.commentId;
+    const {walletAddress} = req.body;
+    const input = <DeleteCommentInput>{
+      postId,
+      commentId,
+      walletAddress,
+    }
+    const posts = await DeleteComment(input);
+    return res.json(posts);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// update a post
+postRouter.patch('/:id', async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const {walletAddress, content, title} = req.body;
+    const input = <UpdatePostInput>{
+      postId,
+      walletAddress,
+      content,
+      title,
+    }
+    const posts = await UpdatePost(input);
+    return res.json(posts);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// update a comment
+postRouter.patch('/:id/comment/:commentId', async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const commentId = req.params.commentId;
+    const {walletAddress, content} = req.body;
+    const input = <UpdateCommentInput>{
+      postId,
+      commentId,
+      walletAddress,
+      content,
+    }
+    const posts = await UpdateComment(input);
+    return res.json(posts);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // downvote a post
 postRouter.delete('/:id/downvote', async (req, res) => {
