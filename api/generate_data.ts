@@ -1,4 +1,9 @@
-import { CreateComment, CreatePost } from './src/database/post'
+import {
+  Bounty,
+  CreateComment,
+  CreatePost,
+  UpvotePost,
+} from './src/database/post'
 import { LoremIpsum } from 'lorem-ipsum'
 // const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 
@@ -15,6 +20,7 @@ const lorem = new LoremIpsum({
 
 const postCount = 50
 const commentsPerPost = 10
+const upvoteMax = 50
 
 // grabs a random wallet address
 const getWalletAddress = () => {
@@ -44,9 +50,11 @@ const generateData = async () => {
       content: lorem.generateParagraphs(2),
       walletAddress: getWalletAddress(),
       tags: ['base', 'ethereum', 'solidity'],
-      bountAmount: Math.random() * 5,
-      bountyStatus: 'open',
-      bountyId: 'test bounty id',
+      bounty: <Bounty>{
+        amount: Math.random() * 5,
+        status: 'open',
+        id: 'test bounty id',
+      },
     }
     const createdPost = await CreatePost(post)
     posts.push()
@@ -57,6 +65,16 @@ const generateData = async () => {
         walletAddress: getWalletAddress(),
       }
       await CreateComment(comment)
+    }
+
+    for (let j = 0; j < upvoteMax; j++) {
+      // randomly upvote post
+      if (Math.random() > 0.5) {
+        await UpvotePost({
+          postId: createdPost.id,
+          walletAddress: getWalletAddress(),
+        })
+      }
     }
   }
 }
