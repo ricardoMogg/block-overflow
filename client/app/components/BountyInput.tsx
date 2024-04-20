@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -10,13 +11,25 @@ import {
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { useRouter } from "next/navigation";
 
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 
 function BountyInput({
   updateAmount,
 }: {
   updateAmount: (arg0: number) => void;
 }) {
+  const { primaryWallet } = useDynamicContext();
+  const [balance, setBalance] = useState(null);
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (primaryWallet) {
+        const value = await primaryWallet.connector.getBalance();
+        setBalance(value);
+      }
+    };
+    fetchBalance();
+  }, [primaryWallet]);
   return (
     <Box
       width="100%"
@@ -64,9 +77,26 @@ function BountyInput({
           >
             ETH
           </Button>
-          <Text color="#aaa" fontSize="12" fontWeight={600}>
-            Balance: 0 ETH
-          </Text>
+          <HStack>
+            <VStack>
+              <Text
+                maxW={100}
+                overflow="hidden"
+                whiteSpace="nowrap"
+                textOverflow="ellipsis"
+                color="#aaa"
+                fontSize="10"
+                fontWeight={600}
+              >
+                Balance: {balance}
+              </Text>
+            </VStack>
+            <VStack>
+              <Text color="#aaa" fontSize="10" fontWeight={600}>
+                ETH
+              </Text>
+            </VStack>
+          </HStack>
         </VStack>
       </HStack>
     </Box>
