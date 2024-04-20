@@ -18,6 +18,7 @@ import {
   VStack,
   Image,
   useDisclosure,
+  Spacer,
 } from "@chakra-ui/react";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
@@ -28,17 +29,6 @@ import ArrowButton from "@/app/components/ArrowButton";
 import { GetPost, UpdatePost } from "@/app/hooks/post";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import abi from "../../../lib/BountyContract.json";
-
-function RequiredIndicator() {
-  return (
-    <Text
-      color="#CF202F"
-      as="span"
-    >
-      *
-    </Text>
-  );
-}
 
 export default function CreatePage({ params }: { params: { postId: string } }) {
   const [post, setPost] = useState<Post>();
@@ -61,8 +51,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         color="#0A0B0D"
         fontWeight={500}
         borderRadius={40}
-        px={12}
-        py={8}
+        height="32px"
       >
         {item}
       </Button>
@@ -107,17 +96,25 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
       <VStack
         w="100%"
         maxW="1200px"
-        gap={40}
+        gap={10}
         alignItems="flex-start"
         alignSelf="center"
-        paddingTop="20px"
+        paddingTop={20}
       >
+        <Heading
+          as="h2"
+          fontSize="28px"
+          fontWeight="bold"
+        >
+          {post?.title}
+        </Heading>
         <TipBanner post={post} />
         <HStack
           flex={1}
-          alignContent={"center"}
+          alignItems="flex-start"
+          gap={8}
         >
-          <Box paddingRight={"20px"}>
+          <Box>
             <VStack>
               <ArrowButton
                 direction={"up"}
@@ -130,20 +127,8 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               />
             </VStack>
           </Box>
-          <Box paddingRight={"80px"}>
-            <VStack
-              spacing={4}
-              alignItems="flex-start"
-            >
-              <Heading
-                as="h2"
-                fontSize={"15px"}
-                size="xl"
-                mb={2}
-                fontWeight="bold"
-              >
-                {post?.title}
-              </Heading>
+          <Box>
+            <VStack alignItems="flex-start">
               <Text mb={4}>{post?.content}</Text>
               <HStack>{renderedButtons}</HStack>
             </VStack>
@@ -158,6 +143,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               <VStack
                 flex={1}
                 alignItems="flex-start"
+                gap={4}
               >
                 <Text>
                   Posted on{" "}
@@ -198,6 +184,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             </Button>
           </VStack>
         </HStack>
+        <Spacer boxSize={20} />
         <VStack
           w="100%"
           alignItems="flex-start"
@@ -213,6 +200,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
       <Modal
         isOpen={isOpen}
         onClose={onClose}
+        size={"xl"}
       >
         <ModalOverlay />
         <ModalContent>
@@ -229,7 +217,6 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           </HStack>
           <Divider
             margin="20px 0 20px 0"
-            height={1}
             backgroundColor="#5B616E33"
             orientation="horizontal"
           />
@@ -251,7 +238,6 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           </ModalBody>
           <Divider
             margin="20px 0 20px 0"
-            height={1}
             backgroundColor="#5B616E33"
             orientation="horizontal"
           />
@@ -261,8 +247,9 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               padding="16px 32px 16px 32px"
               borderRadius="100px"
               textColor="black"
-              mr={20}
+              mr={4}
               onClick={onClose}
+              width={"100px"}
             >
               Cancel
             </Button>
