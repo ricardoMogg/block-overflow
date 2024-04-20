@@ -19,13 +19,13 @@ function BountyInput({
   updateAmount: (arg0: number) => void;
 }) {
   const { primaryWallet } = useDynamicContext();
-  const [balance, setBalance] = useState(null);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     const fetchBalance = async () => {
       if (primaryWallet) {
         const value = await primaryWallet.connector.getBalance();
-        setBalance(value);
+        setBalance(parseFloat(value as string));
       }
     };
     fetchBalance();
@@ -53,7 +53,7 @@ function BountyInput({
             placeholder="0.00"
             type="number"
             onChange={(e) => {
-              updateAmount(e.target.value);
+              updateAmount(parseFloat(e.target.value));
             }}
           />
         </VStack>
