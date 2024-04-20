@@ -2,6 +2,7 @@ import {
   Bounty,
   CreateComment,
   CreatePost,
+  UpvoteComment,
   UpvotePost,
 } from './src/database/post'
 import { LoremIpsum } from 'lorem-ipsum'
@@ -19,7 +20,7 @@ const lorem = new LoremIpsum({
 })
 
 const postCount = 50
-const maxCommentsPerPost = 10
+const maxCommentsPerPost = 5
 const upvoteMax = 50
 
 // grabs a random wallet address
@@ -81,13 +82,24 @@ const generateData = async () => {
     posts.push()
     for (let j = 0; j < maxCommentsPerPost; j++) {
       // randomly add comments
-      if (Math.random() > 0.5) {
+      if (Math.random() > 0.2) {
         const comment = {
           postId: createdPost.id,
           content: lorem.generateParagraphs(3),
           walletAddress: getWalletAddress(),
         }
-        await CreateComment(comment)
+        const createdComment = await CreateComment(comment)
+
+        for (let j = 0; j < upvoteMax; j++) {
+          // randomly upvote post
+          if (Math.random() > 0.1) {
+            await UpvoteComment({
+              postId: createdPost.id,
+              commentId: createdComment.id,
+              walletAddress: getWalletAddress(),
+            })
+          }
+        }
       }
     }
 
