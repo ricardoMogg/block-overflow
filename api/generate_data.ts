@@ -19,7 +19,7 @@ const lorem = new LoremIpsum({
 })
 
 const postCount = 50
-const commentsPerPost = 10
+const maxCommentsPerPost = 10
 const upvoteMax = 50
 
 // grabs a random wallet address
@@ -39,6 +39,27 @@ const getWalletAddress = () => {
   return possible[Math.floor(Math.random() * possible.length)]
 }
 
+// grabs random tags
+const getTags = () => {
+  const possible = [
+    'base',
+    'ethereum',
+    'solidity',
+    'web3',
+    'defi',
+    'nft',
+    'ipfs',
+    'dapps',
+  ]
+  const tags = []
+  for (let i = 0; i < possible.length; i++) {
+    if (Math.random() > 0.5) {
+      tags.push(possible[i])
+    }
+  }
+  return tags
+}
+
 // calls CreatePost and CreateComment functions from /src/database/post.ts in a loop
 const generateData = async () => {
   const posts = []
@@ -49,7 +70,7 @@ const generateData = async () => {
       title: lorem.generateWords(10),
       content: lorem.generateParagraphs(2),
       walletAddress: getWalletAddress(),
-      tags: ['base', 'ethereum', 'solidity'],
+      tags: getTags(),
       bounty: <Bounty>{
         amount: Math.random() * 5,
         status: 'open',
@@ -58,13 +79,16 @@ const generateData = async () => {
     }
     const createdPost = await CreatePost(post)
     posts.push()
-    for (let j = 0; j < commentsPerPost; j++) {
-      const comment = {
-        postId: createdPost.id,
-        content: lorem.generateParagraphs(3),
-        walletAddress: getWalletAddress(),
+    for (let j = 0; j < maxCommentsPerPost; j++) {
+      // randomly add comments
+      if (Math.random() > 0.5) {
+        const comment = {
+          postId: createdPost.id,
+          content: lorem.generateParagraphs(3),
+          walletAddress: getWalletAddress(),
+        }
+        await CreateComment(comment)
       }
-      await CreateComment(comment)
     }
 
     for (let j = 0; j < upvoteMax; j++) {
