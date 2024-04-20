@@ -8,6 +8,7 @@ import {
   Divider,
   Button,
 } from "@chakra-ui/react";
+import { comment } from "postcss";
 import { memo, useMemo } from "react";
 
 export type Post = PostDetail & PostMetrics;
@@ -24,13 +25,15 @@ export type PostDetail = {
 };
 
 export type PostMetrics = {
-  voteCount: number;
-  answerCount: number;
-  viewCount: number;
-  reward?: {
-    amount: number;
-    currency: string;
+  _count: {
+    comments: number;
+    upvotes: number;
   };
+};
+export type PostMetricsProps = {
+  comments: number;
+  upvotes: number;
+  bountyAmount: number;
 };
 
 const MOCK_BUTTONS = ["Ethereum", "OP", "Base"];
@@ -77,19 +80,19 @@ const PostDetail = memo(function PostDetail({
   );
 });
 
-function PostMetricsBase(props: PostMetrics) {
+function PostMetricsBase(props: PostMetricsProps) {
   return (
     <VStack alignItems="flex-start" gap={16}>
       <VStack alignItems="flex-start" color="#5B616E" gap={1}>
         <Text as="span" whiteSpace="nowrap">
-          0 votes
+          {props.upvotes} votes
         </Text>
         <Text as="span" whiteSpace="nowrap">
-          0 answers
+          {props.comments} answers
         </Text>
-        <Text as="span" whiteSpace="nowrap">
+        {/* <Text as="span" whiteSpace="nowrap">
           0 views
-        </Text>
+        </Text> */}
       </VStack>
       <Badge
         variant="solid"
@@ -99,15 +102,20 @@ function PostMetricsBase(props: PostMetrics) {
         borderRadius={4}
         px={4}
       >
-        1 ETH reward
+        {props.bountyAmount ? `${props.bountyAmount} ETH reward` : ""}
       </Badge>
     </VStack>
   );
 }
 
 const PostComponent = memo(function PostComponent(post: Post) {
-  const { voteCount, answerCount, viewCount, reward, ...details } = post;
-  const metrics = { voteCount, answerCount, viewCount, reward };
+  const { _count, ...details } = post;
+  const bountyAmount = details.bountyAmount ? details.bountyAmount : 0;
+  const metrics = {
+    comments: _count.comments,
+    upvotes: _count.upvotes,
+    bountyAmount,
+  };
 
   return (
     <VStack>
