@@ -44,8 +44,7 @@ export default function CreatePage() {
   async function onSubmit(formData: FormData) {
     const bountyId: number = generateNumericUUID();
 
-    walletConnector
-      ?.getWalletClient()
+    (walletConnector?.getWalletClient() as any)
       .writeContract({
         address: "0x8f0774909DdBFD0B399b15a527057B7a4caf93dc",
         abi: abi.abi,
