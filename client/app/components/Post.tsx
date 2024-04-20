@@ -36,15 +36,14 @@ export type PostMetricsProps = {
   bountyAmount: number;
 };
 
-const MOCK_BUTTONS = ["Ethereum", "OP", "Base"];
-
 const PostDetail = memo(function PostDetail({
   title,
   content,
   walletAddress,
+  tags,
 }: PostDetail) {
   const renderedButtons = useMemo(() => {
-    return MOCK_BUTTONS.map((item) => (
+    return tags.map((item) => (
       <Button
         key={item}
         backgroundColor="#EEF0F3"
