@@ -23,25 +23,22 @@ import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
 import { Post } from "@/app/components/Post";
 import TipBanner from "../components/TipBanner";
+import { AddComment } from "../../hooks/comment";
 import CommentsComponent, { PostComment } from "@/app/components/Comment";
 import ArrowButton from "@/app/components/ArrowButton";
 import { GetPost, UpdatePost } from "@/app/hooks/post";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import abi from "../../../lib/BountyContract.json";
-
-function RequiredIndicator() {
-  return (
-    <Text color="#CF202F" as="span">
-      *
-    </Text>
-  );
-}
+import { useRouter } from "next/navigation";
+import { on } from "events";
 
 export default function CreatePage({ params }: { params: { postId: string } }) {
   const [post, setPost] = useState<Post>();
 
   const [isCreator, setIsCreator] = useState(false);
   const { primaryWallet, walletConnector } = useDynamicContext();
+
+  const [answerText, setAnswerText] = useState("");
 
   useEffect(() => {
     GetPost(params.postId).then((res) => {
@@ -73,6 +70,19 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
   const handleDownVote = () => {
     console.log("Clicked on downvote button");
   };
+
+  const router = useRouter();
+
+  function onSubmitCreateComment() {
+    AddComment({
+      postId: post?.id as string,
+      content: answerText,
+      walletAddress: primaryWallet?.address as string,
+    }).then(() => {
+      onClose();
+      router.refresh(), [router];
+    });
+  }
 
   function executeBountyPayout(comment: PostComment) {
     (walletConnector?.getWalletClient() as any)
@@ -207,8 +217,10 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             <HStack flex={1} justifyContent={"center"}>
               <Box />
               <Textarea
+                id="answer-text"
                 w="600px"
                 h="200px"
+                onChange={(e) => setAnswerText(e.target.value)}
                 borderWidth={"2px"}
                 padding="10px"
                 placeholder="Write down your answer. Be specific, code snippets help. Be respectful, those that are rude will be banned."
@@ -239,7 +251,9 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               borderRadius="100px"
               bgColor={"#0052FF"}
               textColor="white"
-              onClick={() => {}}
+              onClick={() => {
+                onSubmitCreateComment();
+              }}
             >
               Post
             </Button>
