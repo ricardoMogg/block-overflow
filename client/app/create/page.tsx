@@ -11,9 +11,10 @@ import {
 import Input from "../components/shared/Input";
 import HeaderContainer from "../components/Header/HeaderContainer";
 import { CreatePost } from "../hooks/post";
-import { DynamicWidget, useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { DynamicWidget, useDynamicContext } from "../../lib/dynamic";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import BountyInput from "../components/BountyInput";
 
 function RequiredIndicator() {
   return (
@@ -56,15 +57,9 @@ export default function CreatePage() {
           Don’t be scared to ask anon.
         </Text>
       </HeaderContainer>
-      <HStack
-        maxW={1080}
-        flex={1}
-        gap={40}
-        alignItems="flex-start"
-        alignSelf="center"
-      >
-        <form action={onSubmit}>
-          <VStack gap={24} alignItems="flex-start" maxW={640} w="100%">
+      <HStack flex={1} gap={40} alignItems="flex-start" alignSelf="center">
+        <VStack gap={24} alignItems="flex-start" maxW={1640} w="100%">
+          <form action={onSubmit}>
             <label style={{ width: "100%" }}>
               <Text fontWeight={500}>
                 Title
@@ -83,7 +78,12 @@ export default function CreatePage() {
                 borderWidth={1}
                 pt={0}
               >
-                <Textarea name="content" width="100%" />
+                <Textarea
+                  noOfLines={10}
+                  minH={150}
+                  name="content"
+                  width="100%"
+                />
               </Box>
             </label>
             <label style={{ width: "100%" }}>
@@ -107,6 +107,7 @@ export default function CreatePage() {
                 px={32}
                 py={16}
                 fontWeight={500}
+                marginTop={20}
                 disabled={!isAuthenticated}
               >
                 Post your question
@@ -114,14 +115,14 @@ export default function CreatePage() {
             ) : (
               <DynamicWidget />
             )}
-          </VStack>
-        </form>
-        <VStack gap={24}>
+          </form>
+        </VStack>
+        <VStack maxW={300} gap={24}>
           <VStack alignItems="flex-start">
             <Text fontWeight={500}>{`Add a tip?`}</Text>
             <Text color="#5B616E">{`Bounties greatly increase the chance of your question being answered quickly. And it\’s just nice to tip anons willing to help you.`}</Text>
           </VStack>
-          <div>Placeholder for bounty module</div>
+          <BountyInput amount={0} />
         </VStack>
       </HStack>
     </main>
