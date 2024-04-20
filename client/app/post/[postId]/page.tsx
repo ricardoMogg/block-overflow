@@ -2,12 +2,22 @@
 import {
   Box,
   Button,
+  Divider,
   HStack,
   Heading,
   Icon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
+  Textarea,
   VStack,
   Image,
+  useDisclosure,
 } from "@chakra-ui/react";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
@@ -86,6 +96,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         });
       });
   }
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <main className="flex min-h-screen flex-col justify-between">
@@ -160,6 +171,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               color="white"
               w="100%"
               borderRadius={"100px"}
+              onClick={onOpen}
             >
               Answer question
             </Button>
@@ -173,6 +185,67 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           />
         </VStack>
       </VStack>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent bgColor={"white"} flex={1} padding="40px">
+          <HStack justifyContent={"space-between"}>
+            <Box></Box>
+            <ModalHeader>
+              <Text justifyContent={"center"} whiteSpace={"nowrap"}>
+                Answer Question
+              </Text>
+            </ModalHeader>
+            <ModalCloseButton />
+          </HStack>
+          <Divider
+            margin="20px 0 20px 0"
+            height={1}
+            backgroundColor="#5B616E33"
+            orientation="horizontal"
+          />
+          <ModalBody>
+            <HStack flex={1} justifyContent={"center"}>
+              <Box />
+              <Textarea
+                w="600px"
+                h="200px"
+                borderWidth={"2px"}
+                padding="10px"
+                placeholder="Write down your answer. Be specific, code snippets help. Be respectful, those that are rude will be banned."
+              />
+              <Box />
+            </HStack>
+          </ModalBody>
+          <Divider
+            margin="20px 0 20px 0"
+            height={1}
+            backgroundColor="#5B616E33"
+            orientation="horizontal"
+          />
+          <ModalFooter>
+            <Button
+              bgColor="#EEF0F3"
+              padding="16px 32px 16px 32px"
+              borderRadius="100px"
+              textColor="black"
+              mr={20}
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              colorScheme="blue"
+              padding="16px 32px 16px 32px"
+              borderRadius="100px"
+              bgColor={"#0052FF"}
+              textColor="white"
+              onClick={() => {}}
+            >
+              Post
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </main>
   );
 }
