@@ -22,6 +22,7 @@ export type PostDetail = {
   bountyId?: string;
   bountyAmount?: number;
   bountyStatus?: string;
+  createdAt: Date;
 };
 
 export type PostMetrics = {
@@ -59,19 +60,39 @@ const PostDetail = memo(function PostDetail({
   }, []);
 
   return (
-    <HStack alignItems="flex-start" gap="16px">
-      <Box w="32px" borderRadius="16px" overflow="hidden" flexShrink="0">
-        <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+    <HStack
+      alignItems="flex-start"
+      gap="16px"
+    >
+      <Box
+        w="32px"
+        borderRadius="16px"
+        overflow="hidden"
+        flexShrink="0"
+      >
+        <Image
+          src="https://bit.ly/dan-abramov"
+          alt="Dan Abramov"
+        />
       </Box>
       <VStack gap={16}>
-        <VStack align="flex-start" gap="2px">
+        <VStack
+          align="flex-start"
+          gap="2px"
+        >
           <Text fontSize="large">{title}</Text>
           <Text fontSize="small">{`By: ${walletAddress}`}</Text>
-          <Text fontSize="medium" color="GrayText">
+          <Text
+            fontSize="medium"
+            color="GrayText"
+          >
             {content}
           </Text>
         </VStack>
-        <HStack gap={8} alignSelf="flex-start">
+        <HStack
+          gap={8}
+          alignSelf="flex-start"
+        >
           {renderedButtons}
         </HStack>
       </VStack>
@@ -81,12 +102,25 @@ const PostDetail = memo(function PostDetail({
 
 function PostMetricsBase(props: PostMetricsProps) {
   return (
-    <VStack alignItems="flex-start" gap={16}>
-      <VStack alignItems="flex-start" color="#5B616E" gap={1}>
-        <Text as="span" whiteSpace="nowrap">
+    <VStack
+      alignItems="flex-start"
+      gap={16}
+    >
+      <VStack
+        alignItems="flex-start"
+        color="#5B616E"
+        gap={1}
+      >
+        <Text
+          as="span"
+          whiteSpace="nowrap"
+        >
           {props.upvotes} votes
         </Text>
-        <Text as="span" whiteSpace="nowrap">
+        <Text
+          as="span"
+          whiteSpace="nowrap"
+        >
           {props.comments} answers
         </Text>
         {/* <Text as="span" whiteSpace="nowrap">
@@ -118,7 +152,11 @@ const PostComponent = memo(function PostComponent(post: Post) {
 
   return (
     <VStack>
-      <HStack alignItems="flex-start" p={8} pb={24}>
+      <HStack
+        alignItems="flex-start"
+        p={8}
+        pb={24}
+      >
         <PostDetail {...details} />
 
         <PostMetricsBase {...metrics} />
