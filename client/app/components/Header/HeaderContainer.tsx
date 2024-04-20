@@ -1,18 +1,25 @@
-import { memo } from "react";
+import React, { memo } from "react";
 import NavBar from "./NavBar";
 import { Box } from "@chakra-ui/react";
+import HeaderContent from "./HomeHeaderContent";
 
-const HeaderContainer = memo(function HeaderContainer() {
+type HeaderContainerProps = {
+  children?: React.ReactNode;
+};
+
+const HeaderContainer = memo(function HeaderContainer({
+  children,
+}: HeaderContainerProps) {
   return (
     <Box
-      height="100vh"
-      maxHeight="400px"
+      height="30vh"
       padding="0 20px"
       backgroundImage="url(/background.png)"
       backgroundSize="cover"
       backgroundPosition="center"
     >
       <NavBar />
+      {children && <Box paddingTop="6vh">{children}</Box>}
     </Box>
   );
 });

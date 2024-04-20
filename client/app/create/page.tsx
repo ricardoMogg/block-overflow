@@ -1,10 +1,14 @@
 import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import Input from "../components/shared/Input";
 import { MarkdownEditor } from "../components/shared/Editor";
+import HeaderContainer from "../components/Header/HeaderContainer";
 
 function RequiredIndicator() {
   return (
-    <Text color="#CF202F" as="span">
+    <Text
+      color="#CF202F"
+      as="span"
+    >
       *
     </Text>
   );
@@ -12,15 +16,39 @@ function RequiredIndicator() {
 
 export default function CreatePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <HStack maxW={1080} flex={1} gap={40} alignItems='flex-start'>
-        <VStack gap={24} alignItems="flex-start" maxW={640} w="100%">
+    <main className="flex min-h-screen flex-col justify-between">
+      <HeaderContainer>
+        <Text
+          color="white"
+          fontSize="64px"
+          fontFamily="monospace"
+          align="center"
+        >
+          Don’t be scared to ask anon.
+        </Text>
+      </HeaderContainer>
+      <HStack
+        maxW={1080}
+        flex={1}
+        gap={40}
+        alignItems="flex-start"
+        alignSelf="center"
+      >
+        <VStack
+          gap={24}
+          alignItems="flex-start"
+          maxW={640}
+          w="100%"
+        >
           <label style={{ width: "100%" }}>
             <Text fontWeight={500}>
               Title
               <RequiredIndicator />
             </Text>
-            <Input placeholder="How do I..." width="100%" />
+            <Input
+              placeholder="How do I..."
+              width="100%"
+            />
           </label>
           <label style={{ width: "100%" }}>
             <Text fontWeight={500}>
@@ -59,9 +87,9 @@ export default function CreatePage() {
           </Button>
         </VStack>
         <VStack gap={24}>
-          <VStack alignItems='flex-start'>
+          <VStack alignItems="flex-start">
             <Text fontWeight={500}>{`Add a tip?`}</Text>
-            <Text color='#5B616E'>{`Bounties greatly increase the chance of your question being answered quickly. And it\’s just nice to tip anons willing to help you.`}</Text>
+            <Text color="#5B616E">{`Bounties greatly increase the chance of your question being answered quickly. And it\’s just nice to tip anons willing to help you.`}</Text>
           </VStack>
           <div>Placeholder for bounty module</div>
         </VStack>
