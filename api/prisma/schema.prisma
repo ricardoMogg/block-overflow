@@ -22,6 +22,9 @@ model Post {
   comments  Comment[]
   upvotes PostUpvote[]
   tags String[]
+  bountyAmount Float?
+  bountyId String?
+  bountyStatus String?
 }
 
 model Comment {
