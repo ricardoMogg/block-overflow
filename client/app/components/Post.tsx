@@ -7,6 +7,7 @@ import {
   Badge,
   Divider,
   Button,
+  Spacer,
 } from "@chakra-ui/react";
 import { comment } from "postcss";
 import { memo, useMemo } from "react";
@@ -53,18 +54,17 @@ const PostDetail = memo(function PostDetail({
         color="#0A0B0D"
         fontWeight={500}
         borderRadius={40}
-        px={12}
-        py={8}
+        height="32px"
       >
         {item}
       </Button>
     ));
-  }, []);
+  }, [tags]);
 
   return (
     <HStack
       alignItems="flex-start"
-      gap="16px"
+      gap={4}
     >
       <Box
         w="32px"
@@ -77,26 +77,27 @@ const PostDetail = memo(function PostDetail({
           alt="Dan Abramov"
         />
       </Box>
-      <VStack gap={16}>
+      <VStack gap={6}>
         <VStack
           align="flex-start"
-          gap="2px"
+          gap={1}
         >
-          <Text fontSize="large">{title}</Text>
+          <Text
+            fontSize="large"
+            as="b"
+          >
+            {title}
+          </Text>
           <Text fontSize="small">{`By: ${walletAddress}`}</Text>
           <Text
             fontSize="medium"
             color="GrayText"
+            noOfLines={2}
           >
             {content}
           </Text>
         </VStack>
-        <HStack
-          gap={8}
-          alignSelf="flex-start"
-        >
-          {renderedButtons}
-        </HStack>
+        <HStack alignSelf="flex-start">{renderedButtons}</HStack>
       </VStack>
     </HStack>
   );
@@ -106,12 +107,12 @@ function PostMetricsBase(props: PostMetricsProps) {
   return (
     <VStack
       alignItems="flex-start"
-      gap={16}
+      gap={4}
     >
       <VStack
         alignItems="flex-start"
         color="#5B616E"
-        gap={1}
+        gap={0.5}
       >
         <Text
           as="span"
@@ -135,7 +136,7 @@ function PostMetricsBase(props: PostMetricsProps) {
         fontWeight={600}
         backgroundColor="#F5FFFB"
         borderRadius={4}
-        px={4}
+        whiteSpace="pretty"
       >
         {props.bountyAmount ? `${props.bountyAmount} ETH reward` : ""}
       </Badge>
@@ -153,19 +154,28 @@ const PostComponent = memo(function PostComponent(post: Post) {
   };
 
   return (
-    <VStack>
+    <VStack
+      gap={4}
+      paddingTop={4}
+    >
       <HStack
         alignItems="flex-start"
-        p={8}
-        pb={24}
+        justifyContent="space-between"
+        gap={8}
       >
-        <PostDetail {...details} />
-
-        <PostMetricsBase {...metrics} />
+        <Box
+          flexShrink={0}
+          width="620px"
+        >
+          <PostDetail {...details} />
+        </Box>
+        <Box>
+          <PostMetricsBase {...metrics} />
+        </Box>
       </HStack>
-
+      <Spacer />
       <Divider
-        height={1}
+        height="1px"
         backgroundColor="#5B616E33"
         orientation="horizontal"
       />

@@ -7,6 +7,9 @@ const ContentContainer = memo(function ContentContainer() {
     <Box
       alignSelf="center"
       paddingTop="40px"
+      maxW="80vw"
+      display="flex"
+      overflow="hidden"
     >
       <Posts />
     </Box>
