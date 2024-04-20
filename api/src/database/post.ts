@@ -1,10 +1,19 @@
 import client from './client'
 
+type BountyStatus = 'open' | 'closed'
+
+type Bounty = {
+  id: string
+  amount: number
+  status: BountyStatus
+}
+
 type CreatePostInput = {
   title: string
   content: string
   walletAddress: string
   tags: string[]
+  bounty?: Bounty
 }
 function CreatePost(post: CreatePostInput) {
   return client.post.create({
@@ -13,6 +22,9 @@ function CreatePost(post: CreatePostInput) {
       content: post.content,
       walletAddress: post.walletAddress,
       tags: post.tags,
+      bountyId: post.bounty?.id,
+      bountyAmount: post.bounty?.amount,
+      bountyStatus: post.bounty?.status,
     },
   })
 }
@@ -101,6 +113,7 @@ type UpdatePostInput = {
   content: string
   walletAddress: string
   tags: string[]
+  bountyStatus: BountyStatus
 }
 function UpdatePost(updatePost: UpdatePostInput) {
   return client.post.update({
@@ -112,6 +125,7 @@ function UpdatePost(updatePost: UpdatePostInput) {
       title: updatePost.title,
       content: updatePost.content,
       tags: updatePost.tags,
+      bountyStatus: updatePost.bountyStatus,
     },
     include: {
       _count: {
@@ -327,4 +341,6 @@ export {
   UpdateCommentInput,
   UpdatePost,
   UpdatePostInput,
+  Bounty,
+  BountyStatus,
 }
