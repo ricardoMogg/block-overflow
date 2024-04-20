@@ -12,7 +12,11 @@ import { useRouter } from "next/navigation";
 
 import { memo } from "react";
 
-function BountyInput({ updateAmount }: { updateAmount: () => number }) {
+function BountyInput({
+  updateAmount,
+}: {
+  updateAmount: (arg0: number) => void;
+}) {
   return (
     <Box
       width="100%"
@@ -34,8 +38,9 @@ function BountyInput({ updateAmount }: { updateAmount: () => number }) {
             w="100%"
             fontSize={32}
             placeholder="0.00"
-            onChange={() => {
-              updateAmount();
+            type="number"
+            onChange={(e) => {
+              updateAmount(e.target.value);
             }}
           />
         </VStack>
