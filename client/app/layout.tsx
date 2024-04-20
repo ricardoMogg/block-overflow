@@ -5,13 +5,12 @@ import { Inter } from "next/font/google";
 import {
   DynamicContextProvider,
   EthereumWalletConnectors,
-  DynamicWagmiConnector,
 } from "../lib/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Block overflow",
+  title: "BlockOverflow",
   description: "Don't be scared to ask anon.",
 };
 
