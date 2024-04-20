@@ -15,6 +15,8 @@ import { DynamicWidget, useDynamicContext } from "../../lib/dynamic";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import BountyInput from "../components/BountyInput";
+import { parseEther } from "viem";
+import abi from "../../lib/BountyContract.json";
 
 function RequiredIndicator() {
   return (
@@ -25,24 +27,46 @@ function RequiredIndicator() {
 }
 
 export default function CreatePage() {
-  const { isAuthenticated, primaryWallet } = useDynamicContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const { isAuthenticated, primaryWallet, walletConnector } =
+    useDynamicContext();
+  const [bounty, setBounty] = useState(0);
+
   const router = useRouter();
 
+  function generateNumericUUID(): number {
+    let uuid = "";
+    for (let i = 0; i < 32; i++) {
+      uuid += Math.floor(Math.random() * 10);
+    }
+    return uuid.replace(/(\d{12})/, "$1") as number;
+  }
+
   async function onSubmit(formData: FormData) {
-    console.log(formData.get("title"));
-    console.log(primaryWallet?.address);
+    const bountyId: number = generateNumericUUID();
 
-    setIsLoading(true);
-
-    CreatePost({
-      title: formData.get("title") as string,
-      content: formData.get("content") as string,
-      tags: (formData.get("tags") as string).split(" "),
-      walletAddress: primaryWallet?.address as string,
-    }).then((res) => {
-      router.push("/"), [router];
-    });
+    walletConnector
+      ?.getWalletClient()
+      .writeContract({
+        address: "0x8f0774909DdBFD0B399b15a527057B7a4caf93dc",
+        abi: abi.abi,
+        functionName: "createBounty",
+        args: [bountyId],
+        account: primaryWallet?.address,
+        value: parseEther(bounty.toString()),
+      })
+      .then(() => {
+        CreatePost({
+          title: formData.get("title") as string,
+          content: formData.get("content") as string,
+          tags: (formData.get("tags") as string).split(" "),
+          walletAddress: primaryWallet?.address as string,
+          bountyAmount: parseFloat(bounty.toString()),
+          bountyId: bountyId,
+          bountyStatus: "open",
+        }).then(() => {
+          router.push("/"), [router];
+        });
+      });
   }
 
   return (
@@ -122,7 +146,7 @@ export default function CreatePage() {
             <Text fontWeight={500}>{`Add a tip?`}</Text>
             <Text color="#5B616E">{`Bounties greatly increase the chance of your question being answered quickly. And it\’s just nice to tip anons willing to help you.`}</Text>
           </VStack>
-          <BountyInput amount={0} />
+          <BountyInput updateAmount={setBounty} />
         </VStack>
       </HStack>
     </main>
