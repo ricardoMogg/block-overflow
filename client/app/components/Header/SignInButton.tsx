@@ -7,17 +7,7 @@ import {
 import React, { memo } from "react";
 
 const SignInButton = memo(function SignInButton() {
-  return (
-    <DynamicContextProvider
-      settings={{
-        // Find your environment id at https://app.dynamic.xyz/dashboard/developer
-        environmentId: "f70aa699-4197-4c47-bede-c2e8cf23f927",
-        walletConnectors: [EthereumWalletConnectors],
-      }}
-    >
-      <DynamicWidget />
-    </DynamicContextProvider>
-  );
+  return <DynamicWidget />;
 });
 
 export default SignInButton;
