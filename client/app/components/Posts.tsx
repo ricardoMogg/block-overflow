@@ -10,7 +10,9 @@ export default function Posts() {
 
   useEffect(() => {
     GetPosts().then((res) => {
-      setPosts(res);
+      if (res) {
+        setPosts(res);
+      }
     });
   }, []);
 
@@ -21,7 +23,11 @@ export default function Posts() {
   };
 
   return (
-    <List spacing="24px" alignContent="flex-start" maxW="800px">
+    <List
+      spacing="24px"
+      alignContent="flex-start"
+      maxW="800px"
+    >
       {posts.map((post) => (
         <ListItem
           cursor="pointer"

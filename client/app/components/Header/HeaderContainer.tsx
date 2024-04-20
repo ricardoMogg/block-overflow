@@ -14,12 +14,13 @@ const HeaderContainer = memo(function HeaderContainer({
     <Box
       height="30vh"
       padding="0 20px"
+      minH={360}
       backgroundImage="url(/background.png)"
       backgroundSize="cover"
       backgroundPosition="center"
     >
       <NavBar />
-      {children && <Box paddingTop="6vh">{children}</Box>}
+      {children && <Box paddingTop={80}>{children}</Box>}
     </Box>
   );
 });
