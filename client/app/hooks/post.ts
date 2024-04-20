@@ -48,7 +48,7 @@ export const CreatePost = async (post: CreatePostInput) => {
 };
 
 type UpdatePostInput = {
-  id: number;
+  id: string;
   title: string;
   content: string;
   walletAddress: string;

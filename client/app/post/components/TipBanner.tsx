@@ -7,7 +7,7 @@ const formatBounty = (amount: number | undefined) => {
   // If no amount is provided, return a default message
   if (amount == null) return "No bounty";
   // Convert to a string with 2 decimal places and add the ETH symbol
-  return `${amount.toFixed(2)} ETH`;
+  return `${amount.toFixed(6)} ETH`;
 };
 
 type TipBannerProps = {
@@ -27,32 +27,15 @@ const TipBanner = memo(function TipBanner({ post }: TipBannerProps) {
       w="100%"
       padding={"16px 24px 16px 24px"}
     >
-      <HStack
-        flex={1}
-        alignItems="flex-start"
-        gap={16}
-      >
+      <HStack flex={1} alignItems="flex-start" gap={16}>
         <Box paddingTop={4}>
-          <Image
-            src="/vector.svg"
-            alt="Vector"
-          />
+          <Image src="/vector.svg" alt="Vector" />
         </Box>
-        <VStack
-          spacing={4}
-          alignItems="flex-start"
-        >
-          <Text
-            as="h1"
-            size="xxl"
-            fontWeight="bold"
-          >
+        <VStack spacing={4} alignItems="flex-start">
+          <Text as="h1" size="xxl" fontWeight="bold">
             {formatBounty(post?.bountyAmount)} tip
           </Text>
-          <Text
-            as="h1"
-            size="xl"
-          >
+          <Text as="h1" size="xl">
             The poster of this question has attached a{" "}
             {formatBounty(post?.bountyAmount)} tip for the best answer
           </Text>
