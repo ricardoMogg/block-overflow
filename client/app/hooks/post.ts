@@ -34,7 +34,7 @@ type CreatePostInput = {
 };
 export const CreatePost = async (post: CreatePostInput) => {
   try {
-    const res = await fetch(`http://${env.apiUrl}/post`, {
+    const res = await fetch(`${env.apiUrl}/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
