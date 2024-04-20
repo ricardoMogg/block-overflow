@@ -210,7 +210,7 @@ postRouter.patch('/:id/comment/:commentId', async (req, res) => {
   }
 })
 
-// downvote a post
+// remove a post upvote
 postRouter.delete('/:id/downvote', async (req, res) => {
   try {
     const postId = req.params.id
@@ -226,7 +226,7 @@ postRouter.delete('/:id/downvote', async (req, res) => {
   }
 })
 
-// downvote a comment
+// remove a comment upvote
 postRouter.delete('/:id/comment/downvote/:commentId', async (req, res) => {
   try {
     const postId = req.params.id

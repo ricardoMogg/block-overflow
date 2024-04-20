@@ -11,6 +11,8 @@
   docker-compose up -d
   # generate prisma types if updating db schema
   npx prisma generate
+  # generate posts to see database if you'd like
+  npm run seed
   # run server w/ hot reload
   npm run dev
 ```
