@@ -76,7 +76,6 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
     ));
   }, []);
 
-  // frontend ui that shows the post details
   return (
     <main className="flex min-h-screen flex-col justify-between">
       <HeaderContainer></HeaderContainer>
@@ -151,7 +150,11 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
                 </Text>
                 <Text>{post?.walletAddress}</Text>
                 <HStack>
-                  <Button fontWeight={"bold"} color="#0052FF">
+                  <Button
+                    fontWeight={"bold"}
+                    color="#0052FF"
+                    paddingRight={"15px"}
+                  >
                     Edit question
                   </Button>
                   <Button fontWeight={"bold"} color="#0052FF">
