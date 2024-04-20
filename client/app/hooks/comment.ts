@@ -3,7 +3,7 @@ import GetEnvironment from "@/environment/environment";
 const env = GetEnvironment();
 
 type CreateCommentInput = {
-  postId: number;
+  postId: string;
   content: string;
   walletAddress: string;
 };
@@ -23,7 +23,7 @@ export const AddComment = async (comment: CreateCommentInput) => {
 };
 
 type UpdateCommentInput = {
-  postId: number;
+  postId: string;
   commentId: number;
   content: string;
   walletAddress: string;
@@ -47,7 +47,7 @@ export const UpdateComment = async (comment: UpdateCommentInput) => {
 };
 
 type UpvoteCommentInput = {
-  postId: number;
+  postId: string;
   commentId: number;
   walletAddress: string;
 };
@@ -70,7 +70,7 @@ export const UpvoteComment = async (upvote: UpvoteCommentInput) => {
 };
 
 type RemoveCommentUpvoteInput = {
-  postId: number;
+  postId: string;
   commentId: number;
   walletAddress: string;
 };
@@ -95,7 +95,7 @@ export const RemoveCommentUpvote = async (
 };
 
 type DeleteCommentInput = {
-  postId: number;
+  postId: string;
   commentId: number;
   walletAddress: string;
 };
