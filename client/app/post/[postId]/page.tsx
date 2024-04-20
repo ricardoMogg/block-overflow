@@ -1,15 +1,10 @@
 "use client";
 import {
-  Badge,
   Box,
   Button,
-  Divider,
-  Flex,
   HStack,
   Heading,
   Icon,
-  Stack,
-  Tag,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -17,6 +12,7 @@ import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
 import { GetPost } from "@/app/hooks/post";
 import CommentsComponent, { PostComment } from "@/app/components/Comment";
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 
 type Post = {
   id: string;
@@ -66,7 +62,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         {item}
       </Button>
     ));
-  }, []);
+  }, [post?.tags]);
 
   return (
     <main className="flex min-h-screen flex-col justify-between">
@@ -104,9 +100,9 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         <HStack flex={1} alignContent={"center"}>
           <Box paddingRight={"20px"}>
             <VStack>
-              <Icon name="TriangleUpIcon" color="green.500" />
-              <Text>{post?._count?.upvotes}</Text>
-              <Icon name="TriangleDownIcon" color="green.500" />
+              <TriangleUpIcon color="green.500" />
+              <Text>{post?._count?.upvotes ?? "--"}</Text>
+              <TriangleDownIcon color="green.500" />
             </VStack>
           </Box>
           <Box paddingRight={"80px"}>
