@@ -38,7 +38,7 @@ export default function CreatePage() {
     for (let i = 0; i < 32; i++) {
       uuid += Math.floor(Math.random() * 10);
     }
-    return uuid.replace(/(\d{12})/, "$1") as number;
+    return parseInt(uuid.replace(/(\d{12})/, "$1"));
   }
 
   async function onSubmit(formData: FormData) {
