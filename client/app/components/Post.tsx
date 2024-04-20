@@ -13,10 +13,14 @@ import { memo, useMemo } from "react";
 export type Post = PostDetail & PostMetrics;
 
 export type PostDetail = {
-  userId: number;
   id: number;
   title: string;
-  body: string;
+  content: string;
+  walletAddress: string;
+  tags: string[];
+  bountyId?: string;
+  bountyAmount?: number;
+  bountyStatus?: string;
 };
 
 export type PostMetrics = {
@@ -33,8 +37,8 @@ const MOCK_BUTTONS = ["Ethereum", "OP", "Base"];
 
 const PostDetail = memo(function PostDetail({
   title,
-  body,
-  userId,
+  content,
+  walletAddress,
 }: PostDetail) {
   const renderedButtons = useMemo(() => {
     return MOCK_BUTTONS.map((item) => (
@@ -60,9 +64,9 @@ const PostDetail = memo(function PostDetail({
       <VStack gap={16}>
         <VStack align="flex-start" gap="2px">
           <Text fontSize="large">{title}</Text>
-          <Text fontSize="small">{`By: ${userId}`}</Text>
+          <Text fontSize="small">{`By: ${walletAddress}`}</Text>
           <Text fontSize="medium" color="GrayText">
-            {body}
+            {content}
           </Text>
         </VStack>
         <HStack gap={8} alignSelf="flex-start">
