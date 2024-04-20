@@ -38,14 +38,13 @@ export default function CreatePage() {
     for (let i = 0; i < 32; i++) {
       uuid += Math.floor(Math.random() * 10);
     }
-    return uuid.replace(/(\d{12})/, "$1") as number;
+    return parseInt(uuid.replace(/(\d{12})/, "$1"));
   }
 
   async function onSubmit(formData: FormData) {
     const bountyId: number = generateNumericUUID();
 
-    walletConnector
-      ?.getWalletClient()
+    (walletConnector?.getWalletClient() as any)
       .writeContract({
         address: "0x8f0774909DdBFD0B399b15a527057B7a4caf93dc",
         abi: abi.abi,

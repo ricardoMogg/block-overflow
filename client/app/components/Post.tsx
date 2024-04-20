@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { comment } from "postcss";
 import { memo, useMemo } from "react";
+import { PostComment } from "./Comment";
 
 export type Post = PostDetail & PostMetrics;
 
@@ -23,6 +24,7 @@ export type PostDetail = {
   bountyAmount?: number;
   bountyStatus?: string;
   createdAt: Date;
+  comments: PostComment[];
 };
 
 export type PostMetrics = {

@@ -1,26 +1,20 @@
 "use client";
 import {
-  Badge,
   Box,
   Button,
-  Divider,
-  Flex,
   HStack,
   Heading,
   Icon,
-  Stack,
-  Tag,
   Text,
   VStack,
   Image,
 } from "@chakra-ui/react";
-import Input from "../../components/shared/Input";
-import { MarkdownEditor } from "../../components/shared/Editor";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
 import { GetPost } from "@/app/hooks/post";
 import { Post } from "@/app/components/Post";
 import TipBanner from "../components/TipBanner";
+import CommentsComponent, { PostComment } from "@/app/components/Comment";
 
 function RequiredIndicator() {
   return (
@@ -64,7 +58,6 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
       <VStack
         w="100%"
         maxW="1200px"
-        flex={1}
         gap={40}
         alignItems="flex-start"
         alignSelf="center"
@@ -155,31 +148,15 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             </Button>
           </VStack>
         </HStack>
-        <Text
-          fontWeight={"bold"}
-          fontSize={"20px"}
-        >
-          Answers
-        </Text>
-        <Box
+        <VStack
+          w="100%"
+          alignItems="flex-start"
           flex={1}
-          alignSelf={"center"}
         >
-          <Box
-            height="20vh"
-            padding="20px 0 20px 0"
-            backgroundImage="url(/no_comments.png)"
-            backgroundSize="cover"
-            backgroundPosition="center"
-            width="100%"
-          ></Box>
-          <Text
-            padding="20px 0 20px 0"
-            color="#5B616E"
-          >
-            There are no responses yet, be the first to answer
-          </Text>
-        </Box>
+          <CommentsComponent
+            postComments={post?.comments ? post?.comments : []}
+          />
+        </VStack>
       </VStack>
     </main>
   );
