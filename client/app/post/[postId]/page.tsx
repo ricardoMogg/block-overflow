@@ -15,6 +15,7 @@ import { GetPost } from "@/app/hooks/post";
 import { Post } from "@/app/components/Post";
 import TipBanner from "../components/TipBanner";
 import CommentsComponent, { PostComment } from "@/app/components/Comment";
+import ArrowButton from "@/app/components/ArrowButton";
 
 function RequiredIndicator() {
   return (
@@ -52,6 +53,14 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
     ));
   }, [post?.tags]);
 
+  const handleUpVote = () => {
+    console.log("Clicked on upvote button");
+  };
+
+  const handleDownVote = () => {
+    console.log("Clicked on downvote button");
+  };
+
   return (
     <main className="flex min-h-screen flex-col justify-between">
       <HeaderContainer></HeaderContainer>
@@ -70,14 +79,14 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         >
           <Box paddingRight={"20px"}>
             <VStack>
-              <Image
-                src="/arrowUp.svg"
-                alt="Upvote"
+              <ArrowButton
+                direction={"up"}
+                onClick={handleUpVote}
               />
               <Text>{post?._count?.upvotes}</Text>
-              <Image
-                src="/arrowDown.svg"
-                alt="downvote"
+              <ArrowButton
+                direction={"down"}
+                onClick={handleUpVote}
               />
             </VStack>
           </Box>

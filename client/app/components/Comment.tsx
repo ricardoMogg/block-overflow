@@ -1,4 +1,6 @@
-import { Text, Box, VStack, HStack, Icon } from "@chakra-ui/react";
+import { Text, Box, VStack, HStack, Image } from "@chakra-ui/react";
+import ArrowButton from "./ArrowButton";
+import { useCallback } from "react";
 
 export type PostComment = {
   id: string;
@@ -18,7 +20,11 @@ export type PostCommentProps = {
 
 const EmptyCommentsComponent = () => {
   return (
-    <VStack flex={1} alignContent={"flex-start"} alignItems={"flex-start"}>
+    <VStack
+      flex={1}
+      alignContent={"flex-start"}
+      alignItems={"flex-start"}
+    >
       <Box
         width="100%"
         flex={1}
@@ -34,7 +40,10 @@ const EmptyCommentsComponent = () => {
           backgroundPosition="center"
           width="100%"
         ></Box>
-        <Text padding="20px 0 20px 0" color="#5B616E">
+        <Text
+          padding="20px 0 20px 0"
+          color="#5B616E"
+        >
           There are no responses yet, be the first to answer
         </Text>
       </Box>
@@ -43,17 +52,35 @@ const EmptyCommentsComponent = () => {
 };
 
 const SingleCommentComponent = (comment: PostComment) => {
+  const handleUpVote = useCallback(() => {
+    console.log("Clicked on upvote button");
+  }, []);
+
+  const handleDownVote = useCallback(() => {
+    console.log("Clicked on downvote button");
+  }, []);
+
   return (
     <HStack padding={"20px 0 20px 0"}>
       <VStack paddingRight={"20px"}>
-        <Icon name="TriangleUpIcon" color="green.500" />
+        <ArrowButton
+          direction={"up"}
+          onClick={handleUpVote}
+        />
         <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
-        <Icon name="TriangleDownIcon" color="green.500" />
+        <ArrowButton
+          direction={"down"}
+          onClick={handleDownVote}
+        />
       </VStack>
       <VStack>
-        <HStack flex={1} alignContent={"flex-start"} alignSelf={"flex-start"}>
+        <HStack
+          flex={1}
+          alignContent={"flex-start"}
+          alignSelf={"flex-start"}
+        >
           <Text fontSize={"16px"}>{comment.walletAddress}</Text>
-          <Icon name="fa-clock" />
+          <Text fontSize={"16px"}>•</Text>
           <Text fontSize={"16px"}>
             {new Date(comment.createdAt).toLocaleDateString()}
           </Text>
@@ -67,9 +94,15 @@ const SingleCommentComponent = (comment: PostComment) => {
 const FilledCommentsComponent = (comments: PostCommentProps) => {
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <Box flex={1} alignSelf={"center"}>
+      <Box
+        flex={1}
+        alignSelf={"center"}
+      >
         {comments.postComments.map((comment) => (
-          <SingleCommentComponent key={comment.id} {...comment} />
+          <SingleCommentComponent
+            key={comment.id}
+            {...comment}
+          />
         ))}
       </Box>
     </main>
@@ -79,14 +112,20 @@ const FilledCommentsComponent = (comments: PostCommentProps) => {
 const CommentsComponent = (comments: PostCommentProps) => {
   return comments?.postComments.length ? (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text fontWeight={"bold"} fontSize={"20px"}>
+      <Text
+        fontWeight={"bold"}
+        fontSize={"20px"}
+      >
         Answers
       </Text>
       {<FilledCommentsComponent {...comments} />}
     </main>
   ) : (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text fontWeight={"bold"} fontSize={"20px"}>
+      <Text
+        fontWeight={"bold"}
+        fontSize={"20px"}
+      >
         Answers
       </Text>
       {<EmptyCommentsComponent />}
