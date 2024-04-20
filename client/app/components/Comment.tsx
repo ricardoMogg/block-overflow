@@ -1,4 +1,4 @@
-import { Text, Box, VStack, HStack, Image } from "@chakra-ui/react";
+import { Text, Box, VStack, HStack, Button } from "@chakra-ui/react";
 import ArrowButton from "./ArrowButton";
 import { useCallback } from "react";
 
@@ -16,15 +16,13 @@ export type PostComment = {
 
 export type PostCommentProps = {
   postComments: PostComment[];
+  bountyPayoutSelection: (arg0: PostComment) => void;
+  isBountyOpen: boolean;
 };
 
 const EmptyCommentsComponent = () => {
   return (
-    <VStack
-      flex={1}
-      alignContent={"flex-start"}
-      alignItems={"flex-start"}
-    >
+    <VStack flex={1} alignContent={"flex-start"} alignItems={"flex-start"}>
       <Box
         width="100%"
         flex={1}
@@ -40,10 +38,7 @@ const EmptyCommentsComponent = () => {
           backgroundPosition="center"
           width="100%"
         ></Box>
-        <Text
-          padding="20px 0 20px 0"
-          color="#5B616E"
-        >
+        <Text padding="20px 0 20px 0" color="#5B616E">
           There are no responses yet, be the first to answer
         </Text>
       </Box>
@@ -51,7 +46,15 @@ const EmptyCommentsComponent = () => {
   );
 };
 
-const SingleCommentComponent = (comment: PostComment) => {
+const SingleCommentComponent = ({
+  comment,
+  bountyPayoutSelection,
+  isBountyOpen,
+}: {
+  comment: PostComment;
+  bountyPayoutSelection: (arg0: PostComment) => void;
+  isBountyOpen: boolean;
+}) => {
   const handleUpVote = useCallback(() => {
     console.log("Clicked on upvote button");
   }, []);
@@ -59,26 +62,15 @@ const SingleCommentComponent = (comment: PostComment) => {
   const handleDownVote = useCallback(() => {
     console.log("Clicked on downvote button");
   }, []);
-
   return (
     <HStack padding={"20px 0 20px 0"}>
       <VStack paddingRight={"20px"}>
-        <ArrowButton
-          direction={"up"}
-          onClick={handleUpVote}
-        />
+        <ArrowButton direction={"up"} onClick={handleUpVote} />
         <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
-        <ArrowButton
-          direction={"down"}
-          onClick={handleDownVote}
-        />
+        <ArrowButton direction={"down"} onClick={handleDownVote} />
       </VStack>
       <VStack>
-        <HStack
-          flex={1}
-          alignContent={"flex-start"}
-          alignSelf={"flex-start"}
-        >
+        <HStack flex={1} alignContent={"flex-start"} alignSelf={"flex-start"}>
           <Text fontSize={"16px"}>{comment.walletAddress}</Text>
           <Text fontSize={"16px"}>•</Text>
           <Text fontSize={"16px"}>
@@ -87,6 +79,24 @@ const SingleCommentComponent = (comment: PostComment) => {
         </HStack>
         <Text fontSize={"16px"}>{comment.content}</Text>
       </VStack>
+      {isBountyOpen && (
+        <VStack paddingRight={"20px"}>
+          <Button
+            marginTop={"40px"}
+            padding={"16px 32px 16px 32px"}
+            fontSize={10}
+            bgColor="#0052FF"
+            color="white"
+            w="20px"
+            borderRadius={"20px"}
+            onClick={() => {
+              bountyPayoutSelection(comment);
+            }}
+          >
+            &#x2713;
+          </Button>
+        </VStack>
+      )}
     </HStack>
   );
 };
@@ -94,14 +104,13 @@ const SingleCommentComponent = (comment: PostComment) => {
 const FilledCommentsComponent = (comments: PostCommentProps) => {
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <Box
-        flex={1}
-        alignSelf={"center"}
-      >
+      <Box flex={1} alignSelf={"center"}>
         {comments.postComments.map((comment) => (
           <SingleCommentComponent
+            isBountyOpen={comments.isBountyOpen}
+            bountyPayoutSelection={comments.bountyPayoutSelection}
             key={comment.id}
-            {...comment}
+            comment={comment}
           />
         ))}
       </Box>
@@ -112,20 +121,14 @@ const FilledCommentsComponent = (comments: PostCommentProps) => {
 const CommentsComponent = (comments: PostCommentProps) => {
   return comments?.postComments.length ? (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text
-        fontWeight={"bold"}
-        fontSize={"20px"}
-      >
+      <Text fontWeight={"bold"} fontSize={"20px"}>
         Answers
       </Text>
       {<FilledCommentsComponent {...comments} />}
     </main>
   ) : (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text
-        fontWeight={"bold"}
-        fontSize={"20px"}
-      >
+      <Text fontWeight={"bold"} fontSize={"20px"}>
         Answers
       </Text>
       {<EmptyCommentsComponent />}

@@ -11,18 +11,17 @@ import {
 } from "@chakra-ui/react";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
-import { GetPost } from "@/app/hooks/post";
 import { Post } from "@/app/components/Post";
 import TipBanner from "../components/TipBanner";
 import CommentsComponent, { PostComment } from "@/app/components/Comment";
 import ArrowButton from "@/app/components/ArrowButton";
+import { GetPost, UpdatePost } from "@/app/hooks/post";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import abi from "../../../lib/BountyContract.json";
 
 function RequiredIndicator() {
   return (
-    <Text
-      color="#CF202F"
-      as="span"
-    >
+    <Text color="#CF202F" as="span">
       *
     </Text>
   );
@@ -31,11 +30,15 @@ function RequiredIndicator() {
 export default function CreatePage({ params }: { params: { postId: string } }) {
   const [post, setPost] = useState<Post>();
 
+  const [isCreator, setIsCreator] = useState(false);
+  const { primaryWallet, walletConnector } = useDynamicContext();
+
   useEffect(() => {
     GetPost(params.postId).then((res) => {
       setPost(res);
     });
-  });
+    setIsCreator(primaryWallet?.address === post?.walletAddress);
+  }, [primaryWallet, params.postId, post?.walletAddress]);
 
   const renderedButtons = useMemo(() => {
     return post?.tags.map((item) => (
@@ -61,6 +64,29 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
     console.log("Clicked on downvote button");
   };
 
+  function executeBountyPayout(comment: PostComment) {
+    (walletConnector?.getWalletClient() as any)
+      .writeContract({
+        address: "0x8f0774909DdBFD0B399b15a527057B7a4caf93dc",
+        abi: abi.abi,
+        functionName: "executePayout",
+        args: [post?.bountyId, comment.walletAddress],
+        account: primaryWallet?.address,
+      })
+      .then(() => {
+        UpdatePost({
+          id: post?.id as string,
+          title: post?.title as string,
+          content: post?.content as string,
+          tags: post?.tags as string[],
+          walletAddress: post?.walletAddress as string,
+          bountyStatus: "closed",
+        }).then(() => {
+          alert("Bounty has been payed");
+        });
+      });
+  }
+
   return (
     <main className="flex min-h-screen flex-col justify-between">
       <HeaderContainer></HeaderContainer>
@@ -73,28 +99,16 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         paddingTop="20px"
       >
         <TipBanner post={post} />
-        <HStack
-          flex={1}
-          alignContent={"center"}
-        >
+        <HStack flex={1} alignContent={"center"}>
           <Box paddingRight={"20px"}>
             <VStack>
-              <ArrowButton
-                direction={"up"}
-                onClick={handleUpVote}
-              />
+              <ArrowButton direction={"up"} onClick={handleUpVote} />
               <Text>{post?._count?.upvotes}</Text>
-              <ArrowButton
-                direction={"down"}
-                onClick={handleUpVote}
-              />
+              <ArrowButton direction={"down"} onClick={handleUpVote} />
             </VStack>
           </Box>
           <Box paddingRight={"80px"}>
-            <VStack
-              spacing={4}
-              alignItems="flex-start"
-            >
+            <VStack spacing={4} alignItems="flex-start">
               <Heading
                 as="h2"
                 fontSize={"15px"}
@@ -115,10 +129,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               borderColor={"palette/line"}
               padding={"16px 24px 16px 24px"}
             >
-              <VStack
-                flex={1}
-                alignItems="flex-start"
-              >
+              <VStack flex={1} alignItems="flex-start">
                 <Text>
                   Posted on{" "}
                   {post?.createdAt
@@ -135,10 +146,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
                   >
                     Edit question
                   </Button>
-                  <Button
-                    fontWeight={"bold"}
-                    color="#0052FF"
-                  >
+                  <Button fontWeight={"bold"} color="#0052FF">
                     Share as a Frame
                   </Button>
                 </HStack>
@@ -157,13 +165,11 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             </Button>
           </VStack>
         </HStack>
-        <VStack
-          w="100%"
-          alignItems="flex-start"
-          flex={1}
-        >
+        <VStack w="100%" alignItems="flex-start" flex={1}>
           <CommentsComponent
             postComments={post?.comments ? post?.comments : []}
+            isBountyOpen={post?.bountyStatus != "closed" && isCreator}
+            bountyPayoutSelection={executeBountyPayout}
           />
         </VStack>
       </VStack>
