@@ -173,7 +173,14 @@ postRouter.delete('/:id/comment/:commentId', async (req, res) => {
 postRouter.patch('/:id', async (req, res) => {
   try {
     const postId = req.params.id
-    const { walletAddress, content, title, tags, bountyStatus } = req.body
+    const {
+      walletAddress,
+      content,
+      title,
+      tags,
+      bountyStatus,
+      chosenCommentId,
+    } = req.body
     const input = <UpdatePostInput>{
       postId,
       walletAddress,
@@ -181,6 +188,7 @@ postRouter.patch('/:id', async (req, res) => {
       title,
       tags,
       bountyStatus,
+      chosenCommentId,
     }
     const posts = await UpdatePost(input)
     return res.json(posts)
