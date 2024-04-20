@@ -14,7 +14,7 @@ import { memo, useMemo } from "react";
 export type Post = PostDetail & PostMetrics;
 
 export type PostDetail = {
-  id: number;
+  id: string;
   title: string;
   content: string;
   walletAddress: string;

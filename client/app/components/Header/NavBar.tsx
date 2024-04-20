@@ -12,7 +12,7 @@ const NavBar = memo(function NavBar() {
           color="white"
           fontWeight="bold"
         >
-          BasedOverflow
+          BlockOverflow
         </Text>
       </Box>
       <Spacer />
