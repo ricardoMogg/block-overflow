@@ -7,29 +7,25 @@ import {
   Icon,
   Text,
   VStack,
+  Image,
 } from "@chakra-ui/react";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
 import { GetPost } from "@/app/hooks/post";
+import { Post } from "@/app/components/Post";
+import TipBanner from "../components/TipBanner";
 import CommentsComponent, { PostComment } from "@/app/components/Comment";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  walletAddress: string;
-  tags: string[];
-  bountyId?: string;
-  bountyAmount?: number;
-  bountyStatus?: string;
-  comments: PostComment[];
-  _count: {
-    comments: number;
-    upvotes: number;
-  };
-  createdAt: Date;
-};
+function RequiredIndicator() {
+  return (
+    <Text
+      color="#CF202F"
+      as="span"
+    >
+      *
+    </Text>
+  );
+}
 
 export default function CreatePage({ params }: { params: { postId: string } }) {
   const [post, setPost] = useState<Post>();
@@ -39,14 +35,6 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
       setPost(res);
     });
   });
-
-  // Format bounty amount as currency (assuming it's in Ether for this example)
-  const formatBounty = (amount: number | undefined) => {
-    // If no amount is provided, return a default message
-    if (amount == null) return "No bounty";
-    // Convert to a string with 2 decimal places and add the ETH symbol
-    return `${amount.toFixed(2)} ETH`;
-  };
 
   const renderedButtons = useMemo(() => {
     return post?.tags.map((item) => (
@@ -75,38 +63,29 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         alignSelf="center"
         paddingTop="20px"
       >
-        <Box
-          bgColor={"green/0"}
-          color="green"
-          borderColor={"green/5"}
-          borderWidth={"1px"}
-          borderRadius={"8px"}
-          w="100%"
-          padding={"16px 24px 16px 24px"}
+        <TipBanner post={post} />
+        <HStack
+          flex={1}
+          alignContent={"center"}
         >
-          <HStack flex={1}>
-            <Icon name="fa-info" color="green.500" />
-            <VStack spacing={4} alignItems="flex-start">
-              <Text as="h1" size="xxl" fontWeight="bold">
-                {formatBounty(post?.bountyAmount)} tip
-              </Text>
-              <Text as="h1" size="xl">
-                The poster of this question has attached a{" "}
-                {formatBounty(post?.bountyAmount)} tip for the best answer
-              </Text>
-            </VStack>
-          </HStack>
-        </Box>
-        <HStack flex={1} alignContent={"center"}>
           <Box paddingRight={"20px"}>
             <VStack>
-              <TriangleUpIcon color="green.500" />
-              <Text>{post?._count?.upvotes ?? "--"}</Text>
-              <TriangleDownIcon color="green.500" />
+              <Image
+                src="/arrowUp.svg"
+                alt="Upvote"
+              />
+              <Text>{post?._count?.upvotes}</Text>
+              <Image
+                src="/arrowDown.svg"
+                alt="downvote"
+              />
             </VStack>
           </Box>
           <Box paddingRight={"80px"}>
-            <VStack spacing={4} alignItems="flex-start">
+            <VStack
+              spacing={4}
+              alignItems="flex-start"
+            >
               <Heading
                 as="h2"
                 fontSize={"15px"}
@@ -127,7 +106,10 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               borderColor={"palette/line"}
               padding={"16px 24px 16px 24px"}
             >
-              <VStack flex={1} alignItems="flex-start">
+              <VStack
+                flex={1}
+                alignItems="flex-start"
+              >
                 <Text>
                   Posted on{" "}
                   {post?.createdAt
@@ -144,7 +126,10 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
                   >
                     Edit question
                   </Button>
-                  <Button fontWeight={"bold"} color="#0052FF">
+                  <Button
+                    fontWeight={"bold"}
+                    color="#0052FF"
+                  >
                     Share as a Frame
                   </Button>
                 </HStack>
@@ -163,7 +148,11 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             </Button>
           </VStack>
         </HStack>
-        <VStack w="100%" alignItems="flex-start" flex={1}>
+        <VStack
+          w="100%"
+          alignItems="flex-start"
+          flex={1}
+        >
           <CommentsComponent
             postComments={post?.comments ? post?.comments : []}
           />
