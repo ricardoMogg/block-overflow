@@ -28,7 +28,7 @@ type CreatePostInput = {
   content: string;
   walletAddress: string;
   tags: string[];
-  bountyId?: number;
+  bountyId?: string;
   bountyAmount?: number;
   bountyStatus?: BountyStatus;
 };
