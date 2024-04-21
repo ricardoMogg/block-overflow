@@ -19,6 +19,7 @@ export type PostCommentProps = {
   postComments: PostComment[];
   bountyPayoutSelection: (arg0: PostComment) => void;
   isBountyOpen: boolean;
+  chosenCommentId?: string;
 };
 
 const EmptyCommentsComponent = () => {
@@ -58,10 +59,12 @@ const SingleCommentComponent = ({
   comment,
   bountyPayoutSelection,
   isBountyOpen,
+  isSelectedComment,
 }: {
   comment: PostComment;
   bountyPayoutSelection: (arg0: PostComment) => void;
   isBountyOpen: boolean;
+  isSelectedComment?: boolean;
 }) => {
   const handleUpVote = useCallback(() => {
     console.log("Clicked on upvote button");
@@ -111,6 +114,9 @@ const SingleCommentComponent = ({
 
   return (
     <HStack
+      borderWidth={isSelectedComment ? "2px" : "0px"}
+      borderColor={isSelectedComment ? "green" : ""}
+      borderRadius={isSelectedComment ? "24px" : "0px"}
       gap={5}
       padding={"20px 0 20px 0"}
       alignItems="flex-start"
@@ -151,17 +157,18 @@ const SingleCommentComponent = ({
   );
 };
 
-const FilledCommentsComponent = (comments: PostCommentProps) => {
+const FilledCommentsComponent = (props: PostCommentProps) => {
   return (
     <main className="flex min-h-screen flex-col justify-between">
       <Box
         flex={1}
         alignSelf={"center"}
       >
-        {comments.postComments.map((comment) => (
+        {props.postComments.map((comment) => (
           <SingleCommentComponent
-            isBountyOpen={comments.isBountyOpen}
-            bountyPayoutSelection={comments.bountyPayoutSelection}
+            isBountyOpen={props.isBountyOpen}
+            bountyPayoutSelection={props.bountyPayoutSelection}
+            isSelectedComment={props.chosenCommentId == comment.id}
             key={comment.id}
             comment={comment}
           />
@@ -171,16 +178,17 @@ const FilledCommentsComponent = (comments: PostCommentProps) => {
   );
 };
 
-const CommentsComponent = (comments: PostCommentProps) => {
-  return comments?.postComments.length ? (
+const CommentsComponent = (props: PostCommentProps) => {
+  return props?.postComments.length ? (
     <main className="flex min-h-screen flex-col justify-between">
       <Text
         fontWeight={"bold"}
         fontSize={"20px"}
+        pb={"20px"}
       >
         Answers
       </Text>
-      {<FilledCommentsComponent {...comments} />}
+      {<FilledCommentsComponent {...props} />}
     </main>
   ) : (
     <main className="flex min-h-screen flex-col justify-between">
