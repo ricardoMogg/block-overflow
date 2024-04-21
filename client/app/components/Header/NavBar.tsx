@@ -10,8 +10,11 @@ const NavBar = memo(function NavBar() {
     router.push("/");
   };
   return (
-    <HStack height="72px" onClick={onClick} cursor="pointer">
-      <Box>
+    <HStack height="72px">
+      <Box
+        cursor="pointer"
+        onClick={onClick}
+      >
         <Text
           fontFamily="monospace"
           fontSize="x-large"
