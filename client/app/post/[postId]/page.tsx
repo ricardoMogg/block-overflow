@@ -16,7 +16,6 @@ import {
   Text,
   Textarea,
   VStack,
-  Image,
   useDisclosure,
   Spacer,
 } from "@chakra-ui/react";
@@ -31,7 +30,6 @@ import { GetPost, UpdatePost } from "@/app/hooks/post";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import abi from "../../../lib/BountyContract.json";
 import { useRouter } from "next/navigation";
-import { on } from "events";
 import { baseSepolia } from "viem/chains";
 
 export default function CreatePage({ params }: { params: { postId: string } }) {
@@ -103,6 +101,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           tags: post?.tags as string[],
           walletAddress: post?.walletAddress as string,
           bountyStatus: "closed",
+          selectedCommentId: comment.id,
         }).then(() => {
           alert("Bounty has been payed");
         });

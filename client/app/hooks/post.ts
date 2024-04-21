@@ -54,6 +54,7 @@ type UpdatePostInput = {
   walletAddress: string;
   tags: string[];
   bountyStatus?: BountyStatus;
+  selectedCommentId?: string;
 };
 export const UpdatePost = async (post: UpdatePostInput) => {
   try {
