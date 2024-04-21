@@ -179,7 +179,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
                     <Link
                       href={`https://warpcast.com/~/compose?text=https://block-overflow-isu2.vercel.app?post_id=${post?.id}`}
                     >
-                      Share as a Frame
+                      Share as Frame
                     </Link>
                   </Button>
                 </HStack>
