@@ -1,49 +1,49 @@
 import { getFrameMetadata } from "@coinbase/onchainkit/frame";
-import type { Metadata } from "next";
 import { NEXT_PUBLIC_URL } from "./config";
+import { Metadata, ResolvingMetadata } from "next";
+import { ImageResponse } from "next/og";
 
-const frameMetadata = getFrameMetadata({
-  buttons: [
-    {
-      label: "Story time!",
-    },
-    {
-      action: "link",
-      label: "Link to Google",
-      target: "https://www.google.com",
-    },
-    {
-      label: "Redirect to pictures",
-      action: "post_redirect",
-    },
-  ],
-  image: {
-    src: `${NEXT_PUBLIC_URL}/park-3.png`,
-    aspectRatio: "1:1",
-  },
-  input: {
-    text: "Tell me a boat story",
-  },
-  postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-});
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-export const metadata: Metadata = {
-  title: "blockoverflow.xyz",
-  description: "LFG",
-  openGraph: {
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  return {
     title: "blockoverflow.xyz",
     description: "LFG",
-    images: [`${NEXT_PUBLIC_URL}/park-1.png`],
-  },
-  other: {
-    ...frameMetadata,
-  },
-};
+    openGraph: {
+      title: "blockoverflow.xyz",
+      description: "LFG",
+      images: [`${NEXT_PUBLIC_URL}/og?${searchParams}`],
+    },
+    other: {
+      ...getFrameMetadata({
+        buttons: [
+          {
+            label: "Answer question",
+          },
+        ],
+        image: {
+          src: `${NEXT_PUBLIC_URL}/og?post_id=${searchParams.post_id}`,
+          aspectRatio: "1.91:1",
+        },
+        input: {
+          text: "answer here...",
+        },
+        postUrl: `${NEXT_PUBLIC_URL}/api/frame?post_id=${searchParams.post_id}`,
+      }),
+    },
+  };
+}
 
 export default function Page() {
   return (
-    <>
+    <div>
       <h1>blockoverflow.xyz</h1>
-    </>
+    </div>
   );
 }
