@@ -13,7 +13,12 @@ const ArrowButton = memo(function ArrowButton({
   onClick,
 }: ArrowButtonProp) {
   return (
-    <Button onClick={onClick}>
+    <Button
+      onClick={onClick}
+      padding={3}
+      width="40px"
+      height="40px"
+    >
       <Image
         src={`/arrow-${direction}.svg`}
         alt={`${direction}Vote`}
