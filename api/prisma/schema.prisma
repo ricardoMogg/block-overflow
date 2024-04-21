@@ -25,6 +25,7 @@ model Post {
   bountyAmount Float?
   bountyId String?
   bountyStatus String?
+  chosenCommentId String?
 }
 
 model Comment {

@@ -114,6 +114,7 @@ type UpdatePostInput = {
   walletAddress: string
   tags: string[]
   bountyStatus: BountyStatus
+  chosenCommentId: string
 }
 function UpdatePost(updatePost: UpdatePostInput) {
   return client.post.update({
@@ -126,6 +127,7 @@ function UpdatePost(updatePost: UpdatePostInput) {
       content: updatePost.content,
       tags: updatePost.tags,
       bountyStatus: updatePost.bountyStatus,
+      chosenCommentId: updatePost.chosenCommentId,
     },
     include: {
       _count: {
