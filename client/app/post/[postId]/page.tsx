@@ -16,7 +16,6 @@ import {
   Text,
   Textarea,
   VStack,
-  Image,
   useDisclosure,
   Spacer,
 } from "@chakra-ui/react";
@@ -27,11 +26,10 @@ import TipBanner from "../components/TipBanner";
 import { AddComment } from "../../hooks/comment";
 import CommentsComponent, { PostComment } from "@/app/components/Comment";
 import ArrowButton from "@/app/components/ArrowButton";
-import { GetPost, UpdatePost } from "@/app/hooks/post";
+import { GetPost, UpdatePost, UpvotePost } from "@/app/hooks/post";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import abi from "../../../lib/BountyContract.json";
 import { useRouter } from "next/navigation";
-import { on } from "events";
 import { baseSepolia } from "viem/chains";
 
 export default function CreatePage({ params }: { params: { postId: string } }) {
@@ -44,6 +42,12 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
 
   useEffect(() => {
     GetPost(params.postId).then((res) => {
+      res.comments = res.comments.sort((a: any, b: any) => {
+        if (b.id == res.chosenCommentId) {
+          return 1;
+        }
+        return b.upvotes - a.upvotes;
+      });
       setPost(res);
     });
     setIsCreator(primaryWallet?.address === post?.walletAddress);
@@ -65,7 +69,10 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
   }, [post?.tags]);
 
   const handleUpVote = () => {
-    console.log("Clicked on upvote button");
+    UpvotePost({
+      postId: post?.id as string,
+      walletAddress: primaryWallet?.address as string,
+    });
   };
 
   const handleDownVote = () => {
@@ -103,8 +110,9 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           tags: post?.tags as string[],
           walletAddress: post?.walletAddress as string,
           bountyStatus: "closed",
+          chosenCommentId: comment.id,
         }).then(() => {
-          alert("Bounty has been payed");
+          alert("Bounty has been paid");
         });
       });
   }
@@ -130,7 +138,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             <VStack>
               <ArrowButton direction={"up"} onClick={handleUpVote} />
               <Text>{post?._count?.upvotes}</Text>
-              <ArrowButton direction={"down"} onClick={handleUpVote} />
+              <ArrowButton direction={"down"} onClick={handleDownVote} />
             </VStack>
           </Box>
           <Box>
@@ -189,6 +197,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             postComments={post?.comments ? post?.comments : []}
             isBountyOpen={post?.bountyStatus != "closed" && isCreator}
             bountyPayoutSelection={executeBountyPayout}
+            chosenCommentId={post?.chosenCommentId}
           />
         </VStack>
       </VStack>

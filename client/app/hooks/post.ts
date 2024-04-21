@@ -54,6 +54,7 @@ type UpdatePostInput = {
   walletAddress: string;
   tags: string[];
   bountyStatus?: BountyStatus;
+  chosenCommentId?: string;
 };
 export const UpdatePost = async (post: UpdatePostInput) => {
   try {
@@ -71,7 +72,7 @@ export const UpdatePost = async (post: UpdatePostInput) => {
 };
 
 type UpvotePostInput = {
-  postId: number;
+  postId: string;
   walletAddress: string;
 };
 export const UpvotePost = async (upvote: UpvotePostInput) => {

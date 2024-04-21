@@ -18,15 +18,12 @@ export type PostCommentProps = {
   postComments: PostComment[];
   bountyPayoutSelection: (arg0: PostComment) => void;
   isBountyOpen: boolean;
+  chosenCommentId?: string;
 };
 
 const EmptyCommentsComponent = () => {
   return (
-    <VStack
-      flex={1}
-      alignContent={"flex-start"}
-      alignItems={"flex-start"}
-    >
+    <VStack flex={1} alignContent={"flex-start"} alignItems={"flex-start"}>
       <Box
         width="100%"
         flex={1}
@@ -42,10 +39,7 @@ const EmptyCommentsComponent = () => {
           backgroundPosition="center"
           width="100%"
         ></Box>
-        <Text
-          padding="20px 0 20px 0"
-          color="#5B616E"
-        >
+        <Text padding="20px 0 20px 0" color="#5B616E">
           There are no responses yet, be the first to answer
         </Text>
       </Box>
@@ -57,10 +51,12 @@ const SingleCommentComponent = ({
   comment,
   bountyPayoutSelection,
   isBountyOpen,
+  isSelectedComment,
 }: {
   comment: PostComment;
   bountyPayoutSelection: (arg0: PostComment) => void;
   isBountyOpen: boolean;
+  isSelectedComment?: boolean;
 }) => {
   const handleUpVote = useCallback(() => {
     console.log("Clicked on upvote button");
@@ -70,65 +66,59 @@ const SingleCommentComponent = ({
     console.log("Clicked on downvote button");
   }, []);
   return (
-    <HStack
-      padding={"20px 0 20px 0"}
-      alignItems="flex-start"
-    >
-      <VStack paddingRight={"20px"}>
-        <ArrowButton
-          direction={"up"}
-          onClick={handleUpVote}
-        />
-        <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
-        <ArrowButton
-          direction={"down"}
-          onClick={handleDownVote}
-        />
-      </VStack>
-      <VStack alignItems="flex-start">
-        <Text
-          fontSize={"16px"}
-          color="GrayText"
-        >
-          {`${comment.walletAddress} • ${new Date(
-            comment.createdAt
-          ).toLocaleDateString()}`}
-        </Text>
-        <Text fontSize={"16px"}>{comment.content}</Text>
-      </VStack>
-      {isBountyOpen && (
+    <VStack>
+      <HStack
+        borderWidth={isSelectedComment ? "2px" : "0px"}
+        borderColor={isSelectedComment ? "green" : ""}
+        borderRadius={isSelectedComment ? "24px" : "0px"}
+        padding={"20px 10px 20px 10px"}
+        alignItems="flex-start"
+      >
         <VStack paddingRight={"20px"}>
-          <Button
-            marginTop={"40px"}
-            padding={"16px 32px 16px 32px"}
-            fontSize={10}
-            bgColor="#0052FF"
-            color="white"
-            w="20px"
-            borderRadius={"20px"}
-            onClick={() => {
-              bountyPayoutSelection(comment);
-            }}
-          >
-            &#x2713;
-          </Button>
+          <ArrowButton direction={"up"} onClick={handleUpVote} />
+          <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
+          <ArrowButton direction={"down"} onClick={handleDownVote} />
         </VStack>
-      )}
-    </HStack>
+        <VStack alignItems="flex-start">
+          <Text fontSize={"16px"} color="GrayText">
+            {`${comment.walletAddress} • ${new Date(
+              comment.createdAt
+            ).toLocaleDateString()}`}
+          </Text>
+          <Text fontSize={"16px"}>{comment.content}</Text>
+        </VStack>
+        {isBountyOpen && (
+          <VStack paddingRight={"20px"}>
+            <Button
+              marginTop={"40px"}
+              padding={"16px 32px 16px 32px"}
+              fontSize={10}
+              bgColor="#0052FF"
+              color="white"
+              w="20px"
+              borderRadius={"20px"}
+              onClick={() => {
+                bountyPayoutSelection(comment);
+              }}
+            >
+              &#x2713;
+            </Button>
+          </VStack>
+        )}
+      </HStack>
+    </VStack>
   );
 };
 
-const FilledCommentsComponent = (comments: PostCommentProps) => {
+const FilledCommentsComponent = (props: PostCommentProps) => {
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <Box
-        flex={1}
-        alignSelf={"center"}
-      >
-        {comments.postComments.map((comment) => (
+      <Box flex={1} alignSelf={"center"}>
+        {props.postComments.map((comment) => (
           <SingleCommentComponent
-            isBountyOpen={comments.isBountyOpen}
-            bountyPayoutSelection={comments.bountyPayoutSelection}
+            isBountyOpen={props.isBountyOpen}
+            bountyPayoutSelection={props.bountyPayoutSelection}
+            isSelectedComment={props.chosenCommentId == comment.id}
             key={comment.id}
             comment={comment}
           />
@@ -138,23 +128,17 @@ const FilledCommentsComponent = (comments: PostCommentProps) => {
   );
 };
 
-const CommentsComponent = (comments: PostCommentProps) => {
-  return comments?.postComments.length ? (
+const CommentsComponent = (props: PostCommentProps) => {
+  return props?.postComments.length ? (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text
-        fontWeight={"bold"}
-        fontSize={"20px"}
-      >
+      <Text fontWeight={"bold"} fontSize={"20px"} pb={"20px"}>
         Answers
       </Text>
-      {<FilledCommentsComponent {...comments} />}
+      {<FilledCommentsComponent {...props} />}
     </main>
   ) : (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text
-        fontWeight={"bold"}
-        fontSize={"20px"}
-      >
+      <Text fontWeight={"bold"} fontSize={"20px"}>
         Answers
       </Text>
       {<EmptyCommentsComponent />}
