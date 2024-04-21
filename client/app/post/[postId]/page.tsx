@@ -31,6 +31,7 @@ import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import abi from "../../../lib/BountyContract.json";
 import { useRouter } from "next/navigation";
 import { baseSepolia } from "viem/chains";
+import Link from "next/link";
 
 export default function CreatePage({ params }: { params: { postId: string } }) {
   const [post, setPost] = useState<Post>();
@@ -132,30 +133,16 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         alignSelf="center"
         paddingTop={20}
       >
-        <Heading
-          as="h2"
-          fontSize="28px"
-          fontWeight="bold"
-        >
+        <Heading as="h2" fontSize="28px" fontWeight="bold">
           {post?.title}
         </Heading>
         <TipBanner post={post} />
-        <HStack
-          flex={1}
-          alignItems="flex-start"
-          gap={8}
-        >
+        <HStack flex={1} alignItems="flex-start" gap={8}>
           <Box>
             <VStack>
-              <ArrowButton
-                direction={"up"}
-                onClick={handleUpVote}
-              />
+              <ArrowButton direction={"up"} onClick={handleUpVote} />
               <Text>{post?._count?.upvotes}</Text>
-              <ArrowButton
-                direction={"down"}
-                onClick={handleDownVote}
-              />
+              <ArrowButton direction={"down"} onClick={handleDownVote} />
             </VStack>
           </Box>
           <Box>
@@ -171,11 +158,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               borderColor={"palette/line"}
               padding={"16px 24px 16px 24px"}
             >
-              <VStack
-                flex={1}
-                alignItems="flex-start"
-                gap={4}
-              >
+              <VStack flex={1} alignItems="flex-start" gap={4}>
                 <Text>
                   Posted on{" "}
                   {post?.createdAt
@@ -192,11 +175,12 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
                   >
                     Edit question
                   </Button>
-                  <Button
-                    fontWeight={"bold"}
-                    color="#0052FF"
-                  >
-                    Share as a Frame
+                  <Button fontWeight={"bold"} color="#0052FF">
+                    <Link
+                      href={`https://warpcast.com/~/compose?text=https://block-overflow-isu2.vercel.app?post_id=${post?.id}`}
+                    >
+                      Share as a Frame
+                    </Link>
                   </Button>
                 </HStack>
               </VStack>
@@ -216,11 +200,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           </VStack>
         </HStack>
         <Spacer boxSize={20} />
-        <VStack
-          w="100%"
-          alignItems="flex-start"
-          flex={1}
-        >
+        <VStack w="100%" alignItems="flex-start" flex={1}>
           <CommentsComponent
             postComments={post?.comments ? post?.comments : []}
             isBountyOpen={post?.bountyStatus != "closed" && isCreator}
@@ -229,19 +209,12 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           />
         </VStack>
       </VStack>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size={"xl"}
-      >
+      <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
         <ModalOverlay />
         <ModalContent>
           <HStack justifyContent={"space-between"}>
             <ModalHeader>
-              <Text
-                justifyContent={"center"}
-                whiteSpace={"nowrap"}
-              >
+              <Text justifyContent={"center"} whiteSpace={"nowrap"}>
                 Answer Question
               </Text>
             </ModalHeader>
@@ -253,10 +226,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             orientation="horizontal"
           />
           <ModalBody>
-            <HStack
-              flex={1}
-              justifyContent={"center"}
-            >
+            <HStack flex={1} justifyContent={"center"}>
               <Box />
               <Textarea
                 id="answer-text"
