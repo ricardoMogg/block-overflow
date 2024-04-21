@@ -32,6 +32,7 @@ import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import abi from "../../../lib/BountyContract.json";
 import { useRouter } from "next/navigation";
 import { on } from "events";
+import { baseSepolia } from "viem/chains";
 
 export default function CreatePage({ params }: { params: { postId: string } }) {
   const [post, setPost] = useState<Post>();
@@ -90,6 +91,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         address: "0x8f0774909DdBFD0B399b15a527057B7a4caf93dc",
         abi: abi.abi,
         functionName: "executePayout",
+        chain: baseSepolia,
         args: [post?.bountyId, comment.walletAddress],
         account: primaryWallet?.address,
       })
@@ -119,30 +121,16 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         alignSelf="center"
         paddingTop={20}
       >
-        <Heading
-          as="h2"
-          fontSize="28px"
-          fontWeight="bold"
-        >
+        <Heading as="h2" fontSize="28px" fontWeight="bold">
           {post?.title}
         </Heading>
         <TipBanner post={post} />
-        <HStack
-          flex={1}
-          alignItems="flex-start"
-          gap={8}
-        >
+        <HStack flex={1} alignItems="flex-start" gap={8}>
           <Box>
             <VStack>
-              <ArrowButton
-                direction={"up"}
-                onClick={handleUpVote}
-              />
+              <ArrowButton direction={"up"} onClick={handleUpVote} />
               <Text>{post?._count?.upvotes}</Text>
-              <ArrowButton
-                direction={"down"}
-                onClick={handleUpVote}
-              />
+              <ArrowButton direction={"down"} onClick={handleUpVote} />
             </VStack>
           </Box>
           <Box>
@@ -158,11 +146,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               borderColor={"palette/line"}
               padding={"16px 24px 16px 24px"}
             >
-              <VStack
-                flex={1}
-                alignItems="flex-start"
-                gap={4}
-              >
+              <VStack flex={1} alignItems="flex-start" gap={4}>
                 <Text>
                   Posted on{" "}
                   {post?.createdAt
@@ -179,10 +163,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
                   >
                     Edit question
                   </Button>
-                  <Button
-                    fontWeight={"bold"}
-                    color="#0052FF"
-                  >
+                  <Button fontWeight={"bold"} color="#0052FF">
                     Share as a Frame
                   </Button>
                 </HStack>
@@ -203,11 +184,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           </VStack>
         </HStack>
         <Spacer boxSize={20} />
-        <VStack
-          w="100%"
-          alignItems="flex-start"
-          flex={1}
-        >
+        <VStack w="100%" alignItems="flex-start" flex={1}>
           <CommentsComponent
             postComments={post?.comments ? post?.comments : []}
             isBountyOpen={post?.bountyStatus != "closed" && isCreator}
@@ -215,19 +192,12 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           />
         </VStack>
       </VStack>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size={"xl"}
-      >
+      <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
         <ModalOverlay />
         <ModalContent>
           <HStack justifyContent={"space-between"}>
             <ModalHeader>
-              <Text
-                justifyContent={"center"}
-                whiteSpace={"nowrap"}
-              >
+              <Text justifyContent={"center"} whiteSpace={"nowrap"}>
                 Answer Question
               </Text>
             </ModalHeader>
@@ -239,10 +209,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             orientation="horizontal"
           />
           <ModalBody>
-            <HStack
-              flex={1}
-              justifyContent={"center"}
-            >
+            <HStack flex={1} justifyContent={"center"}>
               <Box />
               <Textarea
                 id="answer-text"
