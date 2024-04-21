@@ -5,13 +5,17 @@ import {
 } from "@coinbase/onchainkit/frame";
 import { NextRequest, NextResponse } from "next/server";
 import { NEXT_PUBLIC_URL } from "../../config";
+import { AddComment, CreateCommentInput } from "@/app/hooks/comment";
+const allowFramegear = process.env.NODE_ENV !== "production";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   let accountAddress: string | undefined = "";
   let text: string | undefined = "";
+  let post_id: string | null = "";
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, {
+    allowFramegear,
     neynarApiKey: "525D3CBB-946E-43FD-9321-D1D336F5C623",
   });
 
@@ -19,28 +23,37 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddress = message.interactor.verified_accounts[0];
   }
 
+  console.log(message);
+
   if (message?.input) {
     text = message.input;
   }
 
-  if (message?.button === 3) {
-    return NextResponse.redirect(
-      "https://www.google.com/search?q=cute+dog+pictures&tbm=isch&source=lnms",
-      { status: 302 }
-    );
+  if (req.nextUrl.searchParams.has("post_id")) {
+    post_id = req.nextUrl.searchParams.get("post_id");
   }
+
+  const commentReq: CreateCommentInput = {
+    content: text,
+    postId: post_id!,
+    walletAddress: accountAddress ?? "missing_address",
+  };
+
+  console.log(commentReq);
+  await AddComment(commentReq);
 
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: [
         {
-          label: `🌲 ${text} 🌲`,
+          action: "link",
+          label: "See more answers",
+          target: `https://block-overflow.vercel.app/post/${post_id}`,
         },
       ],
       image: {
-        src: `${NEXT_PUBLIC_URL}/park-1.png`,
+        src: `${NEXT_PUBLIC_URL}/og?answer_submitted=true`,
       },
-      postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
     })
   );
 }
