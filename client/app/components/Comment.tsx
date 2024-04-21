@@ -61,7 +61,6 @@ const SingleCommentComponent = ({
   const handleUpVote = useCallback(() => {
     console.log("Clicked on upvote button");
   }, []);
-  console.log("selected comment", isSelectedComment);
 
   const handleDownVote = useCallback(() => {
     console.log("Clicked on downvote button");
