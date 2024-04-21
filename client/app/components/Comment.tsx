@@ -1,6 +1,7 @@
-import { Text, Box, VStack, HStack, Button } from "@chakra-ui/react";
+"use client";
+import { Text, Box, VStack, HStack, Button, Image } from "@chakra-ui/react";
 import ArrowButton from "./ArrowButton";
-import { useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export type PostComment = {
   id: string;
@@ -69,12 +70,58 @@ const SingleCommentComponent = ({
   const handleDownVote = useCallback(() => {
     console.log("Clicked on downvote button");
   }, []);
+
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMoveEnter = useCallback(() => {
+    setIsHovering(true);
+  }, []);
+
+  const handleMoveLeave = useCallback(() => {
+    setIsHovering(false);
+  }, []);
+
+  const selectCommentButton = useMemo(() => {
+    return !isBountyOpen && isHovering ? (
+      <Button
+        alignSelf="center"
+        padding={0}
+        justifySelf="flex-end"
+        height="40px"
+        width="40px"
+        borderRadius="50%"
+        bg="transparent"
+        onClick={() => {
+          bountyPayoutSelection(comment);
+        }}
+      >
+        <Image
+          src="/checkmark.svg"
+          alt="Check mark"
+        />
+      </Button>
+    ) : (
+      <Box
+        flexShrink={0}
+        width="40px"
+        height="40px"
+      />
+    );
+  }, [bountyPayoutSelection, comment, isBountyOpen, isHovering]);
+
   return (
     <HStack
+      gap={5}
       padding={"20px 0 20px 0"}
       alignItems="flex-start"
+      justifyContent="flex-start"
+      onMouseEnter={handleMoveEnter}
+      onMouseLeave={handleMoveLeave}
     >
-      <VStack paddingRight={"20px"}>
+      <VStack
+        width="60px"
+        flexShrink={0}
+      >
         <ArrowButton
           direction={"up"}
           onClick={handleUpVote}
@@ -85,7 +132,10 @@ const SingleCommentComponent = ({
           onClick={handleDownVote}
         />
       </VStack>
-      <VStack alignItems="flex-start">
+      <VStack
+        alignItems="flex-start"
+        flexGrow={2}
+      >
         <Text
           fontSize={"16px"}
           color="GrayText"
@@ -96,24 +146,7 @@ const SingleCommentComponent = ({
         </Text>
         <Text fontSize={"16px"}>{comment.content}</Text>
       </VStack>
-      {isBountyOpen && (
-        <VStack paddingRight={"20px"}>
-          <Button
-            marginTop={"40px"}
-            padding={"16px 32px 16px 32px"}
-            fontSize={10}
-            bgColor="#0052FF"
-            color="white"
-            w="20px"
-            borderRadius={"20px"}
-            onClick={() => {
-              bountyPayoutSelection(comment);
-            }}
-          >
-            &#x2713;
-          </Button>
-        </VStack>
-      )}
+      {selectCommentButton}
     </HStack>
   );
 };

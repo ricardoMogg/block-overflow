@@ -14,7 +14,10 @@ import { baseSepolia } from "viem/chains";
 
 function RequiredIndicator() {
   return (
-    <Text color="#CF202F" as="span">
+    <Text
+      color="#CF202F"
+      as="span"
+    >
       *
     </Text>
   );
@@ -88,66 +91,85 @@ export default function CreatePage() {
           Don’t be scared to ask anon.
         </Text>
       </HeaderContainer>
-      <center>
-        <form action={onSubmit}>
-          <HStack
-            flex={1}
-            gap={10}
-            width="60%"
-            alignItems="flex-start"
-            alignSelf="center"
-            paddingTop={20}
-          >
-            <VStack>
-              <FormControl isRequired>
-                <FormLabel fontWeight={500}>Title</FormLabel>
-                <Input name="title" type="text" placeholder="How do I..." />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Question body</FormLabel>
-                <Box borderRadius={8} borderColor="#5B616EA8" pt={0}>
-                  <Textarea
-                    noOfLines={10}
-                    minH={150}
-                    name="content"
-                    width="100%"
-                  />
-                </Box>
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel fontWeight={500}>Tags</FormLabel>
-                <Input
-                  name="tags"
-                  placeholder="Tag chains and technologies you are using to make it easier for others to find"
+      <form
+        action={onSubmit}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <HStack
+          flex={1}
+          gap={10}
+          width="60%"
+          alignItems="flex-start"
+          alignSelf="center"
+          paddingTop={20}
+          justifyContent="center"
+        >
+          <VStack minW="640px">
+            <FormControl isRequired>
+              <FormLabel fontWeight={500}>Title</FormLabel>
+              <Input
+                name="title"
+                type="text"
+                placeholder="How do I..."
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Question body</FormLabel>
+              <Box
+                borderRadius={8}
+                borderColor="#5B616EA8"
+                pt={0}
+              >
+                <Textarea
+                  noOfLines={10}
+                  minH={150}
+                  name="content"
+                  width="100%"
                 />
-              </FormControl>
-            </VStack>
+              </Box>
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel fontWeight={500}>Tags</FormLabel>
+              <Input
+                name="tags"
+                placeholder="Tag chains and technologies you are using to make it easier for others to find"
+              />
+            </FormControl>
+          </VStack>
 
-            <VStack maxW={300} alignItems="stretch" gap={6}>
-              <VStack alignItems="flex-start">
-                <Text fontWeight={500}>{`Add a tip?`}</Text>
-                <Text color="#5B616E">{`Bounties greatly increase the chance of your question being answered quickly. And it\’s just nice to tip anons willing to help you.`}</Text>
-              </VStack>
-              <BountyInput updateAmount={setBounty} />
-              {isAuthenticated ? (
-                <Button
-                  type="submit"
-                  color="#fff"
-                  backgroundColor="#0052FF"
-                  borderRadius={100}
-                  fontWeight={500}
-                  height="56px"
-                  disabled={!isAuthenticated}
-                >
-                  Post your question
-                </Button>
-              ) : (
-                <DynamicWidget />
-              )}
+          <VStack
+            maxW={300}
+            alignItems="stretch"
+            gap={6}
+          >
+            <VStack alignItems="flex-start">
+              <Text fontWeight={500}>{`Add a tip?`}</Text>
+              <Text color="#5B616E">{`Bounties greatly increase the chance of your question being answered quickly. And it\’s just nice to tip anons willing to help you.`}</Text>
             </VStack>
-          </HStack>
-        </form>
-      </center>
+            <BountyInput updateAmount={setBounty} />
+            {isAuthenticated ? (
+              <Button
+                type="submit"
+                color="#fff"
+                backgroundColor="#0052FF"
+                borderRadius={100}
+                fontWeight={500}
+                height="56px"
+                disabled={!isAuthenticated}
+              >
+                Post your question
+              </Button>
+            ) : (
+              <DynamicWidget />
+            )}
+          </VStack>
+        </HStack>
+      </form>
     </main>
   );
 }
