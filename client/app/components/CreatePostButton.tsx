@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Button } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
@@ -16,10 +16,8 @@ function CreatePostButton() {
       fontWeight={500}
       border="1px solid #0052FF"
       borderRadius={100}
-      px={32}
-      py={16}
-      maxW={327}
-      w="100%"
+      py="28px"
+      w="327px"
       onClick={onClick}
     >
       Ask away

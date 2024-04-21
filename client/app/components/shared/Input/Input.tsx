@@ -7,7 +7,6 @@ function BOInput(props: InputProps) {
       borderRadius={8}
       borderColor="#5B616EA8"
       borderWidth={1}
-      padding={16}
       {...props}
     />
   );

@@ -27,15 +27,32 @@ const TipBanner = memo(function TipBanner({ post }: TipBannerProps) {
       w="100%"
       padding={"16px 24px 16px 24px"}
     >
-      <HStack flex={1} alignItems="flex-start" gap={16}>
-        <Box paddingTop={4}>
-          <Image src="/vector.svg" alt="Vector" />
+      <HStack
+        flex={1}
+        alignItems="flex-start"
+        gap={4}
+      >
+        <Box paddingTop={1}>
+          <Image
+            src="/vector.svg"
+            alt="Vector"
+          />
         </Box>
-        <VStack spacing={4} alignItems="flex-start">
-          <Text as="h1" size="xxl" fontWeight="bold">
+        <VStack
+          spacing={1}
+          alignItems="flex-start"
+        >
+          <Text
+            as="h1"
+            size="xxl"
+            fontWeight="bold"
+          >
             {formatBounty(post?.bountyAmount)} tip
           </Text>
-          <Text as="h1" size="xl">
+          <Text
+            as="h1"
+            size="xl"
+          >
             The poster of this question has attached a{" "}
             {formatBounty(post?.bountyAmount)} tip for the best answer
           </Text>

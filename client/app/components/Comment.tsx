@@ -22,7 +22,11 @@ export type PostCommentProps = {
 
 const EmptyCommentsComponent = () => {
   return (
-    <VStack flex={1} alignContent={"flex-start"} alignItems={"flex-start"}>
+    <VStack
+      flex={1}
+      alignContent={"flex-start"}
+      alignItems={"flex-start"}
+    >
       <Box
         width="100%"
         flex={1}
@@ -38,7 +42,10 @@ const EmptyCommentsComponent = () => {
           backgroundPosition="center"
           width="100%"
         ></Box>
-        <Text padding="20px 0 20px 0" color="#5B616E">
+        <Text
+          padding="20px 0 20px 0"
+          color="#5B616E"
+        >
           There are no responses yet, be the first to answer
         </Text>
       </Box>
@@ -63,20 +70,30 @@ const SingleCommentComponent = ({
     console.log("Clicked on downvote button");
   }, []);
   return (
-    <HStack padding={"20px 0 20px 0"}>
+    <HStack
+      padding={"20px 0 20px 0"}
+      alignItems="flex-start"
+    >
       <VStack paddingRight={"20px"}>
-        <ArrowButton direction={"up"} onClick={handleUpVote} />
+        <ArrowButton
+          direction={"up"}
+          onClick={handleUpVote}
+        />
         <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
-        <ArrowButton direction={"down"} onClick={handleDownVote} />
+        <ArrowButton
+          direction={"down"}
+          onClick={handleDownVote}
+        />
       </VStack>
-      <VStack>
-        <HStack flex={1} alignContent={"flex-start"} alignSelf={"flex-start"}>
-          <Text fontSize={"16px"}>{comment.walletAddress}</Text>
-          <Text fontSize={"16px"}>•</Text>
-          <Text fontSize={"16px"}>
-            {new Date(comment.createdAt).toLocaleDateString()}
-          </Text>
-        </HStack>
+      <VStack alignItems="flex-start">
+        <Text
+          fontSize={"16px"}
+          color="GrayText"
+        >
+          {`${comment.walletAddress} • ${new Date(
+            comment.createdAt
+          ).toLocaleDateString()}`}
+        </Text>
         <Text fontSize={"16px"}>{comment.content}</Text>
       </VStack>
       {isBountyOpen && (
@@ -104,7 +121,10 @@ const SingleCommentComponent = ({
 const FilledCommentsComponent = (comments: PostCommentProps) => {
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <Box flex={1} alignSelf={"center"}>
+      <Box
+        flex={1}
+        alignSelf={"center"}
+      >
         {comments.postComments.map((comment) => (
           <SingleCommentComponent
             isBountyOpen={comments.isBountyOpen}
@@ -121,14 +141,20 @@ const FilledCommentsComponent = (comments: PostCommentProps) => {
 const CommentsComponent = (comments: PostCommentProps) => {
   return comments?.postComments.length ? (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text fontWeight={"bold"} fontSize={"20px"}>
+      <Text
+        fontWeight={"bold"}
+        fontSize={"20px"}
+      >
         Answers
       </Text>
       {<FilledCommentsComponent {...comments} />}
     </main>
   ) : (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text fontWeight={"bold"} fontSize={"20px"}>
+      <Text
+        fontWeight={"bold"}
+        fontSize={"20px"}
+      >
         Answers
       </Text>
       {<EmptyCommentsComponent />}

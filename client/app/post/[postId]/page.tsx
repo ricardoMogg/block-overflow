@@ -18,6 +18,7 @@ import {
   VStack,
   Image,
   useDisclosure,
+  Spacer,
 } from "@chakra-ui/react";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import { useEffect, useMemo, useState } from "react";
@@ -55,8 +56,7 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
         color="#0A0B0D"
         fontWeight={500}
         borderRadius={40}
-        px={12}
-        py={8}
+        height="32px"
       >
         {item}
       </Button>
@@ -114,31 +114,39 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
       <VStack
         w="100%"
         maxW="1200px"
-        gap={40}
+        gap={10}
         alignItems="flex-start"
         alignSelf="center"
-        paddingTop="20px"
+        paddingTop={20}
       >
+        <Heading
+          as="h2"
+          fontSize="28px"
+          fontWeight="bold"
+        >
+          {post?.title}
+        </Heading>
         <TipBanner post={post} />
-        <HStack flex={1} alignContent={"center"}>
-          <Box paddingRight={"20px"}>
+        <HStack
+          flex={1}
+          alignItems="flex-start"
+          gap={8}
+        >
+          <Box>
             <VStack>
-              <ArrowButton direction={"up"} onClick={handleUpVote} />
+              <ArrowButton
+                direction={"up"}
+                onClick={handleUpVote}
+              />
               <Text>{post?._count?.upvotes}</Text>
-              <ArrowButton direction={"down"} onClick={handleUpVote} />
+              <ArrowButton
+                direction={"down"}
+                onClick={handleUpVote}
+              />
             </VStack>
           </Box>
-          <Box paddingRight={"80px"}>
-            <VStack spacing={4} alignItems="flex-start">
-              <Heading
-                as="h2"
-                fontSize={"15px"}
-                size="xl"
-                mb={2}
-                fontWeight="bold"
-              >
-                {post?.title}
-              </Heading>
+          <Box>
+            <VStack alignItems="flex-start">
               <Text mb={4}>{post?.content}</Text>
               <HStack>{renderedButtons}</HStack>
             </VStack>
@@ -150,7 +158,11 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               borderColor={"palette/line"}
               padding={"16px 24px 16px 24px"}
             >
-              <VStack flex={1} alignItems="flex-start">
+              <VStack
+                flex={1}
+                alignItems="flex-start"
+                gap={4}
+              >
                 <Text>
                   Posted on{" "}
                   {post?.createdAt
@@ -167,7 +179,10 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
                   >
                     Edit question
                   </Button>
-                  <Button fontWeight={"bold"} color="#0052FF">
+                  <Button
+                    fontWeight={"bold"}
+                    color="#0052FF"
+                  >
                     Share as a Frame
                   </Button>
                 </HStack>
@@ -187,7 +202,12 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
             </Button>
           </VStack>
         </HStack>
-        <VStack w="100%" alignItems="flex-start" flex={1}>
+        <Spacer boxSize={20} />
+        <VStack
+          w="100%"
+          alignItems="flex-start"
+          flex={1}
+        >
           <CommentsComponent
             postComments={post?.comments ? post?.comments : []}
             isBountyOpen={post?.bountyStatus != "closed" && isCreator}
@@ -195,13 +215,19 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           />
         </VStack>
       </VStack>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size={"xl"}
+      >
         <ModalOverlay />
-        <ModalContent bgColor={"white"} flex={1} padding="40px">
+        <ModalContent>
           <HStack justifyContent={"space-between"}>
-            <Box></Box>
             <ModalHeader>
-              <Text justifyContent={"center"} whiteSpace={"nowrap"}>
+              <Text
+                justifyContent={"center"}
+                whiteSpace={"nowrap"}
+              >
                 Answer Question
               </Text>
             </ModalHeader>
@@ -209,12 +235,14 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           </HStack>
           <Divider
             margin="20px 0 20px 0"
-            height={1}
             backgroundColor="#5B616E33"
             orientation="horizontal"
           />
           <ModalBody>
-            <HStack flex={1} justifyContent={"center"}>
+            <HStack
+              flex={1}
+              justifyContent={"center"}
+            >
               <Box />
               <Textarea
                 id="answer-text"
@@ -230,7 +258,6 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
           </ModalBody>
           <Divider
             margin="20px 0 20px 0"
-            height={1}
             backgroundColor="#5B616E33"
             orientation="horizontal"
           />
@@ -240,8 +267,9 @@ export default function CreatePage({ params }: { params: { postId: string } }) {
               padding="16px 32px 16px 32px"
               borderRadius="100px"
               textColor="black"
-              mr={20}
+              mr={4}
               onClick={onClose}
+              width={"100px"}
             >
               Cancel
             </Button>
