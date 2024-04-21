@@ -26,7 +26,7 @@ export type PostDetail = {
   bountyStatus?: string;
   createdAt: Date;
   comments: PostComment[];
-  selectedCommentId?: string;
+  chosenCommentId?: string;
 };
 
 export type PostMetrics = {
