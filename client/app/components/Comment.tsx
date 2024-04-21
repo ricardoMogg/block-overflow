@@ -34,11 +34,7 @@ export type PostCommentProps = {
 
 const EmptyCommentsComponent = () => {
   return (
-    <VStack
-      flex={1}
-      alignContent={"flex-start"}
-      alignItems={"flex-start"}
-    >
+    <VStack flex={1} alignContent={"flex-start"} alignItems={"flex-start"}>
       <Box
         width="100%"
         flex={1}
@@ -54,10 +50,7 @@ const EmptyCommentsComponent = () => {
           backgroundPosition="center"
           width="100%"
         ></Box>
-        <Text
-          padding="20px 0 20px 0"
-          color="#5B616E"
-        >
+        <Text padding="20px 0 20px 0" color="#5B616E">
           There are no responses yet, be the first to answer
         </Text>
       </Box>
@@ -97,7 +90,7 @@ const SingleCommentComponent = ({
   }, []);
 
   const selectCommentButton = useMemo(() => {
-    return !isBountyOpen &&
+    return isBountyOpen &&
       !hasSelectedComment &&
       isHovering &&
       !isSelectedComment ? (
@@ -113,19 +106,10 @@ const SingleCommentComponent = ({
           bountyPayoutSelection(comment);
         }}
       >
-        <Image
-          src="/checkmark.svg"
-          alt="Check mark"
-        />
+        <Image src="/checkmark.svg" alt="Check mark" />
       </Button>
     ) : (
-      !isSelectedComment && (
-        <Box
-          flexShrink={0}
-          width="40px"
-          height="40px"
-        />
-      )
+      !isSelectedComment && <Box flexShrink={0} width="40px" height="40px" />
     );
   }, [
     bountyPayoutSelection,
@@ -138,10 +122,7 @@ const SingleCommentComponent = ({
   const selectedCommentTitle = useMemo(() => {
     return isSelectedComment ? (
       <HStack padding={"20px 0 0 20px"}>
-        <Image
-          src="/trophy.svg"
-          alt="Trophy"
-        />
+        <Image src="/trophy.svg" alt="Trophy" />
         <Text
           bgGradient="linear(to-r, red,orange,green,blue)"
           bgClip="text"
@@ -152,11 +133,7 @@ const SingleCommentComponent = ({
         </Text>
       </HStack>
     ) : (
-      <Box
-        flexShrink={0}
-        width="100%"
-        height="20px"
-      />
+      <Box flexShrink={0} width="100%" height="20px" />
     );
   }, [isSelectedComment]);
 
@@ -179,28 +156,13 @@ const SingleCommentComponent = ({
         onMouseEnter={handleMoveEnter}
         onMouseLeave={handleMoveLeave}
       >
-        <VStack
-          width="60px"
-          flexShrink={0}
-        >
-          <ArrowButton
-            direction={"up"}
-            onClick={handleUpVote}
-          />
+        <VStack width="60px" flexShrink={0}>
+          <ArrowButton direction={"up"} onClick={handleUpVote} />
           <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
-          <ArrowButton
-            direction={"down"}
-            onClick={handleDownVote}
-          />
+          <ArrowButton direction={"down"} onClick={handleDownVote} />
         </VStack>
-        <VStack
-          alignItems="flex-start"
-          flexGrow={2}
-        >
-          <Text
-            fontSize={"16px"}
-            color="GrayText"
-          >
+        <VStack alignItems="flex-start" flexGrow={2}>
+          <Text fontSize={"16px"} color="GrayText">
             {`${comment.walletAddress} • ${new Date(
               comment.createdAt
             ).toLocaleDateString()}`}
@@ -216,10 +178,7 @@ const SingleCommentComponent = ({
 const FilledCommentsComponent = (props: PostCommentProps) => {
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <Box
-        flex={1}
-        alignSelf={"center"}
-      >
+      <Box flex={1} alignSelf={"center"}>
         {props.postComments.map((comment) => (
           <SingleCommentComponent
             isBountyOpen={props.isBountyOpen}
@@ -238,21 +197,14 @@ const FilledCommentsComponent = (props: PostCommentProps) => {
 const CommentsComponent = (props: PostCommentProps) => {
   return props?.postComments.length ? (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text
-        fontWeight={"bold"}
-        fontSize={"20px"}
-        pb={"20px"}
-      >
+      <Text fontWeight={"bold"} fontSize={"20px"} pb={"20px"}>
         Answers
       </Text>
       {<FilledCommentsComponent {...props} />}
     </main>
   ) : (
     <main className="flex min-h-screen flex-col justify-between">
-      <Text
-        fontWeight={"bold"}
-        fontSize={"20px"}
-      >
+      <Text fontWeight={"bold"} fontSize={"20px"}>
         Answers
       </Text>
       {<EmptyCommentsComponent />}
