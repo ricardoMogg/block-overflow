@@ -1,5 +1,15 @@
 "use client";
-import { Text, Box, VStack, HStack, Button, Image } from "@chakra-ui/react";
+import {
+  Text,
+  Box,
+  VStack,
+  HStack,
+  Button,
+  Image,
+  css,
+  cssVar,
+  background,
+} from "@chakra-ui/react";
 import ArrowButton from "./ArrowButton";
 import { useCallback, useMemo, useState } from "react";
 
@@ -60,11 +70,13 @@ const SingleCommentComponent = ({
   bountyPayoutSelection,
   isBountyOpen,
   isSelectedComment,
+  hasSelectedComment,
 }: {
   comment: PostComment;
   bountyPayoutSelection: (arg0: PostComment) => void;
   isBountyOpen: boolean;
   isSelectedComment?: boolean;
+  hasSelectedComment?: boolean;
 }) => {
   const handleUpVote = useCallback(() => {
     console.log("Clicked on upvote button");
@@ -85,7 +97,10 @@ const SingleCommentComponent = ({
   }, []);
 
   const selectCommentButton = useMemo(() => {
-    return !isBountyOpen && isHovering ? (
+    return !isBountyOpen &&
+      !hasSelectedComment &&
+      isHovering &&
+      !isSelectedComment ? (
       <Button
         alignSelf="center"
         padding={0}
@@ -104,56 +119,97 @@ const SingleCommentComponent = ({
         />
       </Button>
     ) : (
+      !isSelectedComment && (
+        <Box
+          flexShrink={0}
+          width="40px"
+          height="40px"
+        />
+      )
+    );
+  }, [
+    bountyPayoutSelection,
+    comment,
+    isBountyOpen,
+    isHovering,
+    isSelectedComment,
+  ]);
+
+  const selectedCommentTitle = useMemo(() => {
+    return isSelectedComment ? (
+      <HStack padding={"20px 0 0 20px"}>
+        <Image
+          src="/trophy.svg"
+          alt="Trophy"
+        />
+        <Text
+          bgGradient="linear(to-r, red,orange,green,blue)"
+          bgClip="text"
+          fontSize="20px"
+          fontWeight="extrabold"
+        >
+          Answer chosen by author
+        </Text>
+      </HStack>
+    ) : (
       <Box
         flexShrink={0}
-        width="40px"
-        height="40px"
+        width="100%"
+        height="20px"
       />
     );
-  }, [bountyPayoutSelection, comment, isBountyOpen, isHovering]);
+  }, [isSelectedComment]);
 
   return (
-    <HStack
-      borderWidth={isSelectedComment ? "2px" : "0px"}
-      borderColor={isSelectedComment ? "green" : ""}
-      borderRadius={isSelectedComment ? "24px" : "0px"}
-      gap={5}
-      padding={"20px 0 20px 0"}
+    <VStack
       alignItems="flex-start"
-      justifyContent="flex-start"
-      onMouseEnter={handleMoveEnter}
-      onMouseLeave={handleMoveLeave}
+      background="linear-gradient(white, white) padding-box, linear-gradient(90deg,red,orange,green,blue) border-box"
+      borderWidth={isSelectedComment ? "3px" : "0px"}
+      borderRadius={isSelectedComment ? "24px" : "0px"}
+      borderColor="transparent"
+      borderStyle="solid"
     >
-      <VStack
-        width="60px"
-        flexShrink={0}
-      >
-        <ArrowButton
-          direction={"up"}
-          onClick={handleUpVote}
-        />
-        <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
-        <ArrowButton
-          direction={"down"}
-          onClick={handleDownVote}
-        />
-      </VStack>
-      <VStack
+      {selectedCommentTitle}
+      <HStack
+        gap={5}
+        width="100%"
+        padding="10px 20px 30px 10px"
         alignItems="flex-start"
-        flexGrow={2}
+        justifyContent="flex-start"
+        onMouseEnter={handleMoveEnter}
+        onMouseLeave={handleMoveLeave}
       >
-        <Text
-          fontSize={"16px"}
-          color="GrayText"
+        <VStack
+          width="60px"
+          flexShrink={0}
         >
-          {`${comment.walletAddress} • ${new Date(
-            comment.createdAt
-          ).toLocaleDateString()}`}
-        </Text>
-        <Text fontSize={"16px"}>{comment.content}</Text>
-      </VStack>
-      {selectCommentButton}
-    </HStack>
+          <ArrowButton
+            direction={"up"}
+            onClick={handleUpVote}
+          />
+          <Text>{comment._count?.upvotes ? comment.upvotes.length : 0}</Text>
+          <ArrowButton
+            direction={"down"}
+            onClick={handleDownVote}
+          />
+        </VStack>
+        <VStack
+          alignItems="flex-start"
+          flexGrow={2}
+        >
+          <Text
+            fontSize={"16px"}
+            color="GrayText"
+          >
+            {`${comment.walletAddress} • ${new Date(
+              comment.createdAt
+            ).toLocaleDateString()}`}
+          </Text>
+          <Text fontSize={"16px"}>{comment.content}</Text>
+        </VStack>
+        {selectCommentButton}
+      </HStack>
+    </VStack>
   );
 };
 
@@ -168,6 +224,7 @@ const FilledCommentsComponent = (props: PostCommentProps) => {
           <SingleCommentComponent
             isBountyOpen={props.isBountyOpen}
             bountyPayoutSelection={props.bountyPayoutSelection}
+            hasSelectedComment={!!props.chosenCommentId}
             isSelectedComment={props.chosenCommentId == comment.id}
             key={comment.id}
             comment={comment}
