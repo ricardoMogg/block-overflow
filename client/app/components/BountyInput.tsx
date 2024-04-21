@@ -39,21 +39,17 @@ function BountyInput({
       minH="128px"
       display="flex"
     >
-      <HStack
-        flex={1}
-        alignItems="flex-start"
-        alignSelf="center"
-        padding={4}
-      >
+      <HStack flex={1} alignItems="flex-start" alignSelf="center" padding={4}>
         <Input
           w="100%"
           fontSize={32}
           placeholder="0.00"
-          type="number"
+          type="text"
           onChange={(e) => {
             updateAmount(parseFloat(e.target.value));
           }}
           border="none"
+          name="bounty_input"
         />
         <VStack alignItems="flex-end">
           <Button
@@ -87,11 +83,7 @@ function BountyInput({
               </Text>
             </VStack>
             <VStack>
-              <Text
-                color="#aaa"
-                fontSize="12"
-                fontWeight={600}
-              >
+              <Text color="#aaa" fontSize="12" fontWeight={600}>
                 ETH
               </Text>
             </VStack>
