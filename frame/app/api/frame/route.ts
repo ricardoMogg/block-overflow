@@ -16,7 +16,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, {
     allowFramegear,
-    neynarApiKey: "525D3CBB-946E-43FD-9321-D1D336F5C623",
+    neynarApiKey: process.env.NEXT_NEYNAR_API_KEY,
   });
 
   if (isValid) {
